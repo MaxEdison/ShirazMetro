@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>برنامه‌ریز سفر مترو شیراز</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div id="contact-box">
+
+        <a href="https://github.com/MaxEdison" target="_blank" title="GitHub">
+            <img src="icons/github.svg" alt="GitHub">
+        </a>
+
+        <a href="https://t.me/MaxEdison" target="_blank" title="Telegram">
+            <img src="icons/telegram.svg" alt="Telegram">
+        </a>
+
+        <a href="https://www.linkedin.com/in/MaxEdison" target="_blank" title="LinkedIn">
+            <img src="icons/linkedin.svg" alt="LinkedIn">
+        </a>
+        
+        <!-- <a href="https://www.x.com/MaxEdison021" target="_blank" title="X(formerly Twitter)">
+            <img src="icons/twitter-original.svg" alt="X(formerly Twitter)">
+        </a> -->
+    </div>
+
+    <div id="trip-container">
+        <h2>برنامه‌ریزی سفر مترو شیراز</h2>
+
+        <select id="start" onchange="checkSelection()">
+            <option value="">انتخاب ایستگاه مبدا</option>
+        </select>
+
+        <select id="destination" onchange="checkSelection()">
+            <option value="">انتخاب ایستگاه مقصد</option>
+        </select>
+        
+        <label class="checkbox-container">
+                            روز تعطیل؟
+            <input type="checkbox" id="holiday">
+            <span class="checkmark"></span>
+        </label>
+
+        <button id="calculate" disabled>برو بریم</button>
+
+        <div id="schedule"></div>
+
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+</html>

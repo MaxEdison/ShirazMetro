@@ -1,0 +1,217 @@
+@import url('https://cdn.fontcdn.ir/Font/Persian/Vazir/Vazir.css');
+
+body {
+    font-family: 'Vazir', sans-serif;
+    background-color: #121212;
+    color: #E0E0E0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    margin: 0;
+    padding: 20px;
+    direction: rtl;
+}
+
+#contact-box {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    display: flex;
+    gap: 15px;
+    z-index: 1000;
+}
+
+#contact-box a {
+    display: block;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    overflow: hidden;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    text-align: center;
+    line-height: 50px; 
+}
+
+#contact-box a img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transition: filter 0.3s ease;
+}
+
+#contact-box a:hover {
+    background-color: #ffffff;
+    transform: scale(1.1);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+}
+
+
+#contact-box a:hover img {
+    filter: brightness(1) invert(0);
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-10px);
+    }
+    60% {
+        transform: translateY(-5px);
+    }
+}
+
+#contact-box a {
+    animation: bounce 3s infinite;
+}
+
+#trip-container {
+    max-width: 350px;
+    width: 100%;
+    background-color: #1F1F1F;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    text-align: center;
+}
+
+h2 {
+    color: #BB86FC;
+    margin-bottom: 20px;
+    font-size: 24px;
+}
+
+select, button {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    border: none;
+    font-size: 16px;
+    font-family: 'vazir', sans-serif;
+    background-color: #2C2C2C;
+    color: #E0E0E0;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.checkbox-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 15px;
+    cursor: pointer;
+}
+
+label {
+    font-size: 16px;
+    color: #BB86FC;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.checkbox-container input[type="checkbox"] {
+    display: none;
+}
+
+.checkbox-container .checkmark {
+    width: 24px;
+    height: 24px;
+    background-color: #2C2C2C;
+    border-radius: 4px;
+    position: relative;
+    transition: background-color 0.3s ease;
+}
+
+.checkbox-container input[type="checkbox"]:checked + .checkmark {
+    background-color: #BB86FC;
+}
+
+.checkbox-container .checkmark::after {
+    content: "";
+    position: absolute;
+    display: none;
+    left: 8px;
+    top: 4px;
+    width: 6px;
+    height: 12px;
+    border: solid #121212;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+.checkbox-container input[type="checkbox"]:checked + .checkmark::after {
+    display: block;
+}
+
+button {
+    background-color: #BB86FC;
+    font-family: 'vazir', sans-serif;
+    color: #121212;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+button:disabled {
+    background-color: #5C5C5C;
+    font-family: 'vazir', sans-serif;
+    cursor: not-allowed;
+}
+
+button:hover:not(:disabled) {
+    background-color: #9C4DFF;
+    font-family: 'vazir', sans-serif;
+}
+
+.schedule-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    border-radius: 6px;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #121212;
+    transition: background-color 0.3s ease;
+}
+
+.arrival-time {
+    text-align: left;
+}
+
+.departure-time {
+    text-align: right;
+}
+
+.missed {
+    background-color: #c70e30;
+}
+
+.ongoing {
+    background-color: #ffb300;
+}
+
+.future {
+    background-color: #08a920;
+}
+
+@media (max-width: 600px) {
+    #trip-container {
+        padding: 20px;
+    }
+
+    h2 {
+        font-size: 22px;
+    }
+
+    select, button {
+        font-size: 14px;
+        font-family: 'vazir', sans-serif;
+        padding: 10px;
+    }
+}
