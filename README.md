@@ -102,6 +102,7 @@ To run this project, you will need to add the following environment variables to
 
 - [@MaxEdison](https://github.com/MaxEdison)
 - [@ParsaBordbar](https://github.com/ParsaBordbar)
+- [@metemaddar](https://github.com/metemaddar)
 
 
 ## Contributing
