@@ -221,6 +221,11 @@ button:hover:not(:disabled) {
     padding: 5px;
     margin-top: 15px;
     background-color: #1A1A1A;
+    display: none;
+}
+
+#schedule.show {
+    display: block;
 }
 
 #schedule::-webkit-scrollbar {
