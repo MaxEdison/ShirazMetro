@@ -197,6 +197,9 @@ function displaySchedule(schedule) {
     const nowTime = now.getHours() * 60 + now.getMinutes();
     const scheduleContainer = document.getElementById('schedule');
     scheduleContainer.innerHTML = '';
+    
+    let nextTrainItem = null;
+    let hasResults = false;
 
     schedule.forEach(({ departure, arrival }) => {
         const [depHours, depMinutes] = departure.split(':').map(Number);
@@ -208,19 +211,41 @@ function displaySchedule(schedule) {
         let status = 'missed';
         if (departureTime > nowTime) {
             status = 'future';
+            // Mark the first future train for scrolling
+            if (!nextTrainItem) {
+                nextTrainItem = true;
+            }
         }
 
         const scheduleItem = document.createElement('div');
         scheduleItem.className = `schedule-item ${status}`;
+        if (status === 'future' && nextTrainItem === true) {
+            scheduleItem.id = 'next-train';
+            nextTrainItem = scheduleItem;
+        }
+        
         scheduleItem.innerHTML = `
             <span class="departure-time">حرکت‌ازمبدا: ${departure}</span>
             <span class="arrival-time">رسیدن‌به‌مقصد: ${arrival}</span>
         `;
         scheduleContainer.appendChild(scheduleItem);
+        hasResults = true;
     });
     
-    // Show the schedule box after results are ready
-    scheduleContainer.classList.add('show');
+    // Only show the schedule box if there are results
+    if (hasResults) {
+        scheduleContainer.classList.add('show');
+        
+        // Scroll to the next available train after a short delay
+        setTimeout(() => {
+            if (nextTrainItem && nextTrainItem !== true) {
+                nextTrainItem.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'center'
+                });
+            }
+        }, 100);
+    }
 }
 
 document.getElementById('calculate').addEventListener('click', function() {
