@@ -180,7 +180,10 @@ function checkSelection() {
     const startStation = document.getElementById('start').value;
     const destinationStation = document.getElementById('destination').value;
     const calculateButton = document.getElementById('calculate');
-    
+    const scheduleContainer = document.getElementById('schedule');
+
+    scheduleContainer.classList.remove('show');
+
     if (startStation === "" || destinationStation === "" || startStation === destinationStation) {
         calculateButton.disabled = true;
     } else {
@@ -214,6 +217,8 @@ function displaySchedule(schedule) {
         `;
         scheduleContainer.appendChild(scheduleItem);
     });
+
+    scheduleContainer.classList.add('show');
 }
 
 document.getElementById('calculate').addEventListener('click', function() {
