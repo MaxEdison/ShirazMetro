@@ -277,6 +277,30 @@ button:hover:not(:disabled) {
     background-color: #08a920;
 }
 
+.current-time {
+    background-color: #ffeb3b !important;
+    color: #000 !important;
+    box-shadow: 0 0 10px rgba(255, 235, 59, 0.5);
+    animation: pulse 2s infinite;
+}
+
+.near-time {
+    background-color: #ffeb3b !important;
+    color: #000 !important;
+}
+
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 10px rgba(255, 235, 59, 0.5);
+    }
+    50% {
+        box-shadow: 0 0 20px rgba(255, 235, 59, 0.8);
+    }
+    100% {
+        box-shadow: 0 0 10px rgba(255, 235, 59, 0.5);
+    }
+}
+
 @media (max-width: 600px) {
     #trip-container {
         padding: 20px;
