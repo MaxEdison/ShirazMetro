@@ -213,6 +213,34 @@ button:hover:not(:disabled) {
     font-family: 'vazir', sans-serif;
 }
 
+#schedule {
+    max-height: 300px;
+    overflow-y: auto;
+    border: 1px solid #2C2C2C;
+    border-radius: 8px;
+    padding: 5px;
+    margin-top: 15px;
+    background-color: #1A1A1A;
+}
+
+#schedule::-webkit-scrollbar {
+    width: 8px;
+}
+
+#schedule::-webkit-scrollbar-track {
+    background: #2C2C2C;
+    border-radius: 4px;
+}
+
+#schedule::-webkit-scrollbar-thumb {
+    background: #BB86FC;
+    border-radius: 4px;
+}
+
+#schedule::-webkit-scrollbar-thumb:hover {
+    background: #9C4DFF;
+}
+
 .schedule-item {
     display: flex;
     justify-content: space-between;
