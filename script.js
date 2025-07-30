@@ -180,7 +180,10 @@ function checkSelection() {
     const startStation = document.getElementById('start').value;
     const destinationStation = document.getElementById('destination').value;
     const calculateButton = document.getElementById('calculate');
-    
+    const scheduleContainer = document.getElementById('schedule');
+
+    scheduleContainer.classList.remove('show');
+
     if (startStation === "" || destinationStation === "" || startStation === destinationStation) {
         calculateButton.disabled = true;
     } else {
@@ -194,6 +197,9 @@ function displaySchedule(schedule) {
     const scheduleContainer = document.getElementById('schedule');
     scheduleContainer.innerHTML = '';
 
+    let nextTrainItem = null;
+    let hasResults = false;
+
     schedule.forEach(({ departure, arrival }) => {
         const [depHours, depMinutes] = departure.split(':').map(Number);
         const [arrHours, arrMinutes] = arrival.split(':').map(Number);
@@ -204,16 +210,38 @@ function displaySchedule(schedule) {
         let status = 'missed';
         if (departureTime > nowTime) {
             status = 'future';
+            if (!nextTrainItem) {
+                nextTrainItem = true;
+            }
         }
 
         const scheduleItem = document.createElement('div');
         scheduleItem.className = `schedule-item ${status}`;
+
+        if (status === 'future' && nextTrainItem === true) {
+            scheduleItem.id = 'next-train';
+            nextTrainItem = scheduleItem;
+        }
+
         scheduleItem.innerHTML = `
             <span class="departure-time">حرکت‌ازمبدا: ${departure}</span>
             <span class="arrival-time">رسیدن‌به‌مقصد: ${arrival}</span>
         `;
         scheduleContainer.appendChild(scheduleItem);
+        hasResults = true;
     });
+    if (hasResults) {
+        scheduleContainer.classList.add('show');
+
+        setTimeout(() => {
+            if (nextTrainItem && nextTrainItem !== true) {
+                nextTrainItem.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'center'
+                });
+            }
+        }, 100);
+    }
 }
 
 document.getElementById('calculate').addEventListener('click', function() {
