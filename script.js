@@ -111,13 +111,13 @@ function populateStations() {
     });
 }
 
-function generateTimes(startTime, endTime, intervalMinutes) {
+function generateTimes(startTime, endTime, intervalMinutes, MODE) {
     const times = [];
     let currentTime = new Date(`1970-01-01T${startTime}:00`);
     const endDate = new Date(`1970-01-01T${endTime}:00`);
     
     for (let i = 0; currentTime <= endDate; i++) {
-        if (i === 0) {
+        if (i === 0 && MODE === 0) {
             intervalMinutes = 20;
         } else {
             intervalMinutes = 15;
@@ -295,19 +295,29 @@ document.getElementById('calculate').addEventListener('click', function() {
     if (FORWARD){
         if (isHoliday) {
             ({ start: startTime, end: endTime } = scheduleTimesHolidayForward[startStation]);
+            MODE = 1; // Holiday Forward
         }else {
             ({ start: startTime, end: endTime } = scheduleTimesForward[startStation]);
+            MODE = 0; // Forward
         }
     } else {
         if (isHoliday) {
             ({ start: startTime, end: endTime } = scheduleTimesHolidayBackward[startStation]);
+            MODE = 3; // Holiday Backward
         }else {
             ({ start: startTime, end: endTime } = scheduleTimesBackward[startStation]);
+            MODE = 2; // Backward
         }
     }
 
 
-    const schedule = generateTimes(startTime, endTime, 15);
+    // Now it should set the mode in `generateTimes` function 
+    // MODE = 0 ~> FORWARD
+    // MODE = 1 ~> HOLIDAY FORWARD
+    // MODE = 2 ~> BACKWARD
+    // MODE = 3 ~> HOLIDAY BACKWARD
+
+    const schedule = generateTimes(startTime, endTime, 15, MODE);
     const tripSchedule = addTripTime(schedule, tripDuration);
 
     displaySchedule(tripSchedule);
