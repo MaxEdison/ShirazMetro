@@ -116,8 +116,14 @@ function generateTimes(startTime, endTime, intervalMinutes) {
     let currentTime = new Date(`1970-01-01T${startTime}:00`);
     const endDate = new Date(`1970-01-01T${endTime}:00`);
     
-    while (currentTime <= endDate) {
-        times.push(currentTime.toTimeString().substr(0, 5)); 
+    for (let i = 0; currentTime <= endDate; i++) {
+        if (i === 0) {
+            intervalMinutes = 20;
+        } else {
+            intervalMinutes = 15;
+        }
+        const timeString = currentTime.toTimeString().substr(0, 5);
+        times[i] = timeString; 
         currentTime.setMinutes(currentTime.getMinutes() + intervalMinutes);
     }
     
