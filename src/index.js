@@ -136,8 +136,8 @@ const getSchedule = (url) => {
   // MODE = 3 ~> HOLIDAY BACKWARD
 
   const startTimes = generateTimes(
-    scheduleData[startStation].start,
-    scheduleData[startStation].end,
+    startTime,
+    endTime,
     15,
     MODE,
   );
