@@ -1,186 +1,29 @@
-const stationsList = ["شهید دستغیب", "شهید دوران", "فرصت شیرازی", "جانبازان", "غدیر", "رازی", "فضیلت", "کاوه", "ولیعصر", "وکیل الرعایا", "زندیه", "امام حسین", "نمازی", "شهید آوینی", "شهید مطهری", "قصردشت", "شاهد", "میرزای‌شیرازی", "دکتر شریعتی", "احسان"];
+const API_URL = "https://api.shiraz-metro.workers.dev/api/v1";
 
-
-const scheduleTimesForward = 
-{
-        "شهید دستغیب": { "start": "05:20", "end": "22:10" },
-        "شهید دوران": { "start": "05:22", "end": "22:12" },
-        "فرصت شیرازی": { "start": "05:24", "end": "22:14" },
-        "جانبازان": { "start": "05:26", "end": "22:16" },
-        "غدیر": { "start": "05:28", "end": "22:18" },
-        "رازی": { "start": "05:30", "end": "22:20" },
-        "فضیلت": { "start": "05:32", "end": "22:22" },
-        "کاوه": { "start": "05:34", "end": "22:24" },
-        "ولیعصر": { "start": "05:36", "end": "22:26" },
-        "وکیل الرعایا": { "start": "05:38", "end": "22:28" },
-        "زندیه": { "start": "05:40", "end": "22:30" },
-        "امام حسین": { "start": "05:42", "end": "22:32" },
-        "نمازی": { "start": "05:44", "end": "22:34" },
-        "شهید آوینی": { "start": "05:46", "end": "22:36" },
-        "شهید مطهری": { "start": "05:48", "end": "22:38" },
-        "قصردشت": { "start": "05:52", "end": "22:42" },
-        "شاهد": { "start": "05:55", "end": "22:45" },
-        "میرزای‌شیرازی": { "start": "05:59", "end": "22:49" },
-        "دکتر شریعتی": { "start": "06:00", "end": "22:50" },
-};
-
-const scheduleTimesHolidayForward = 
-{
-    "شهید دستغیب": { "start": "07:10", "end": "21:10" },
-    "شهید دوران": { "start": "07:12", "end": "21:12" },
-    "فرصت شیرازی": { "start": "07:14", "end": "21:14" },
-    "جانبازان": { "start": "07:16", "end": "21:16" },
-    "غدیر": { "start": "07:18", "end": "21:18" },
-    "رازی": { "start": "07:20", "end": "21:20" },
-    "فضیلت": { "start": "07:22", "end": "21:22" },
-    "کاوه": { "start": "07:24", "end": "21:24" },
-    "ولیعصر": { "start": "07:26", "end": "21:26" },
-    "وکیل الرعایا": { "start": "07:28", "end": "21:28" },
-    "زندیه": { "start": "07:30", "end": "21:30" },
-    "امام حسین": { "start": "07:32", "end": "21:32" },
-    "نمازی": { "start": "07:34", "end": "21:34" },
-    "شهید آوینی": { "start": "07:36", "end": "21:36" },
-    "شهید مطهری": { "start": "07:38", "end": "21:38" },
-    "قصردشت": { "start": "07:42", "end": "21:42" },
-    "شاهد": { "start": "07:45", "end": "21:45" },
-    "میرزای‌شیرازی": { "start": "07:49", "end": "21:49" },
-    "دکتر شریعتی": { "start": "07:50", "end": "21:50" },
-}
-
-const scheduleTimesBackward = 
-{
-    "احسان": { "start": "05:20", "end": "22:05" },
-    "دکتر شریعتی": { "start": "05:22", "end": "22:07" },
-    "میرزای‌شیرازی": { "start": "05:24", "end": "22:09" },
-    "شاهد": { "start": "05:28", "end": "22:13" },
-    "قصردشت": { "start": "05:30", "end": "22:15" },
-    "شهید مطهری": { "start": "05:33", "end": "22:19" },
-    "شهید آوینی": { "start": "05:36", "end": "22:21" },
-    "نمازی": { "start": "05:38", "end": "22:23" },
-    "امام حسین": { "start": "05:41", "end": "22:26" },
-    "زندیه": { "start": "05:43", "end": "22:28" },
-    "وکیل الرعایا": { "start": "05:45", "end": "22:30" },
-    "ولیعصر": { "start": "05:47", "end": "22:32" },
-    "کاوه": { "start": "05:49", "end": "22:34" },
-    "فضیلت": { "start": "05:51", "end": "22:36" },
-    "رازی": { "start": "05:53", "end": "22:38" },
-    "غدیر": { "start": "05:55", "end": "22:40" },
-    "جانبازان": { "start": "05:57", "end": "22:42" },
-    "فرصت شیرازی": { "start": "05:59", "end": "22:44" },
-    "شهید دوران": { "start": "06:01", "end": "22:46" },
-};
-    
-const scheduleTimesHolidayBackward =
-{
-    "احسان": { "start": "07:05", "end": "21:05" },
-    "دکتر شریعتی": { "start": "07:07", "end": "21:07" },
-    "میرزای‌شیرازی": { "start": "07:09", "end": "21:09" },
-    "شاهد": { "start": "07:13", "end": "21:13" },
-    "قصردشت": { "start": "07:15", "end": "21:15" },
-    "شهید مطهری": { "start": "07:19", "end": "21:19" },
-    "شهید آوینی": { "start": "07:21", "end": "21:21" },
-    "نمازی": { "start": "07:23", "end": "21:23" },
-    "امام حسین": { "start": "07:26", "end": "21:26" },
-    "زندیه": { "start": "07:28", "end": "21:28" },
-    "وکیل الرعایا": { "start": "07:30", "end": "21:30" },
-    "ولیعصر": { "start": "07:32", "end": "21:32" },
-    "کاوه": { "start": "07:34", "end": "21:34" },
-    "فضیلت": { "start": "07:36", "end": "21:36" },
-    "رازی": { "start": "07:38", "end": "21:38" },
-    "غدیر": { "start": "07:40", "end": "21:40" },
-    "جانبازان": { "start": "07:42", "end": "21:42" },
-    "فرصت شیرازی": { "start": "07:44", "end": "21:44" },
-    "شهید دوران": { "start": "07:46", "end": "21:46" },
-}
-
-
-function populateStations() {
+async function populateStations() {
     const startSelect = document.getElementById('start');
     const destinationSelect = document.getElementById('destination');
-    
-    stationsList.forEach(station => {
-        const optionStart = document.createElement('option');
-        optionStart.value = station;
-        optionStart.textContent = station;
-        startSelect.appendChild(optionStart);
 
-        const optionDest = document.createElement('option');
-        optionDest.value = station;
-        optionDest.textContent = station;
-        destinationSelect.appendChild(optionDest);
-    });
-}
+    try {
+        const response = await fetch(`${API_URL}/stations/stations`);
+        const stations = await response.json();
 
-function generateTimes(startTime, endTime, intervalMinutes, MODE) {
-    const times = [];
-    let currentTime = new Date(`1970-01-01T${startTime}:00`);
-    const endDate = new Date(`1970-01-01T${endTime}:00`);
-    
-    for (let i = 0; currentTime <= endDate; i++) {
-        if (i === 0 && MODE === 0) {
-            intervalMinutes = 20;
-        } else {
-            intervalMinutes = 15;
-        }
-        const timeString = currentTime.toTimeString().substr(0, 5);
-        times[i] = timeString; 
-        currentTime.setMinutes(currentTime.getMinutes() + intervalMinutes);
+        stations.forEach(station => {
+            const optionStart = document.createElement('option');
+            optionStart.value = station;
+            optionStart.textContent = station;
+            startSelect.appendChild(optionStart);
+
+            const optionDest = document.createElement('option');
+            optionDest.value = station;
+            optionDest.textContent = station;
+            destinationSelect.appendChild(optionDest);
+        });
+    } catch (error) {
+        console.error("Error fetching stations:", error);
     }
-    
-    return times;
 }
 
-let FORWARD = true;
-
-function calculateTripTime(startIndex, destinationIndex) {
-    let tripTime = 0;
-    if (startIndex < destinationIndex) 
-        {
-            for (let i = startIndex + 1; i <= destinationIndex; i++) {
-                if (i === 16 || i === 18) {
-                    tripTime += 4;
-                } else if (i === 17) {
-                    tripTime += 3;
-                } else if (i === 19) {
-                    tripTime += 1;
-                } else {
-                    tripTime += 2;
-                }
-            }
-        } else 
-        {
-            FORWARD = false;
-            for (let i = startIndex - 1; i >= destinationIndex; i--) 
-                {
-                    if (i === 17 || i === 15) 
-                    {
-                        tripTime += 4;
-                    } else if (i === 12) 
-                    {
-                        tripTime += 3;
-                    } else 
-                    {
-                        tripTime += 2;
-                    }
-                }
-        }
-    
-    
-    return tripTime;
-}
-
-
-function addTripTime(startTimes, tripDuration) {
-    return startTimes.map(startTime => {
-        const departure = new Date(`1970-01-01T${startTime}:00`);
-        const arrival = new Date(departure.getTime() + tripDuration * 60000);
-        const arrivalTime = arrival.toTimeString().substr(0, 5);
-        return {
-            departure: startTime,
-            arrival: arrivalTime
-        };
-    });
-}
 
 function checkSelection() {
     const startStation = document.getElementById('start').value;
@@ -282,45 +125,25 @@ function displaySchedule(schedule) {
     }
 }
 
-document.getElementById('calculate').addEventListener('click', function() {
+document.getElementById('calculate').addEventListener('click', async function() {
     const startStation = document.getElementById('start').value;
     const destinationStation = document.getElementById('destination').value;
     const isHoliday = document.getElementById('holiday').checked;
 
+    try {
+        const response = await fetch(
+            `${API_URL}/schedules/calculate?startStation=${encodeURIComponent(startStation)}&destinationStation=${encodeURIComponent(destinationStation)}&holiday=${isHoliday ? 'yes' : 'no'}`
+        );
 
-    const startIndex = stationsList.indexOf(startStation);
-    const destinationIndex = stationsList.indexOf(destinationStation);
-    const tripDuration = calculateTripTime(startIndex, destinationIndex);
+        if (!response.ok) {
+            throw new Error(`API error: ${response.status}`);
+        }
 
-    if (FORWARD){
-        if (isHoliday) {
-            ({ start: startTime, end: endTime } = scheduleTimesHolidayForward[startStation]);
-            MODE = 1; // Holiday Forward
-        }else {
-            ({ start: startTime, end: endTime } = scheduleTimesForward[startStation]);
-            MODE = 0; // Forward
-        }
-    } else {
-        if (isHoliday) {
-            ({ start: startTime, end: endTime } = scheduleTimesHolidayBackward[startStation]);
-            MODE = 3; // Holiday Backward
-        }else {
-            ({ start: startTime, end: endTime } = scheduleTimesBackward[startStation]);
-            MODE = 2; // Backward
-        }
+        const data = await response.json();
+        displaySchedule(data.schedule);
+    } catch (error) {
+        console.error("Error fetching schedule:", error);
     }
-
-
-    // Now it should set the mode in `generateTimes` function 
-    // MODE = 0 ~> FORWARD
-    // MODE = 1 ~> HOLIDAY FORWARD
-    // MODE = 2 ~> BACKWARD
-    // MODE = 3 ~> HOLIDAY BACKWARD
-
-    const schedule = generateTimes(startTime, endTime, 15, MODE);
-    const tripSchedule = addTripTime(schedule, tripDuration);
-
-    displaySchedule(tripSchedule);
 });
 
 
