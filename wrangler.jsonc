@@ -1,0 +1,5 @@
+  {
+    "name": "shirazmetro-api",
+    "compatibility_date": "2025-09-22",
+    "main": "src/index.js"
+  }
