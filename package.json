@@ -1,0 +1,13 @@
+{
+  "name": "shirazmetro-api",
+  "version": "1.0.0",
+  "description": "Shiraz Metro API for Cloudflare Workers",
+  "main": "src/index.js",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy"
+  },
+  "devDependencies": {
+    "wrangler": "^3.0.0"
+  }
+}
