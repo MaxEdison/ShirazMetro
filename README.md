@@ -39,7 +39,7 @@ Get travel time and schedule between two stations.
 
 **Endpoint:**
 ```
-GET /api/v1/scedules/calculate?startStation=STATION&destinationStation=STATION&holiday=true/false
+GET /api/v1/schedules/calculate?startStation=STATION&destinationStation=STATION&holiday=true/false
 ```
 
 **Parameters:**
@@ -49,7 +49,7 @@ GET /api/v1/scedules/calculate?startStation=STATION&destinationStation=STATION&h
 
 **Example:**
 ```bash
-curl "https://api.shiraz-metro.workers.dev/api/v1/scedules/calculate?startStation=رازی&destinationStation=احسان&holiday=false"
+curl "https://api.shiraz-metro.workers.dev/api/v1/schedules/calculate?startStation=رازی&destinationStation=احسان&holiday=false"
 ```
 
 **Response Fields:**
