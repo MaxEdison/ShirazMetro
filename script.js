@@ -93,22 +93,30 @@ const scheduleTimesHolidayBackward =
     "شهید دوران": { "start": "07:46", "end": "21:46" },
 }
 
+const API_URL = "https://api.shiraz-metro.workers.dev/api/v1";
 
-function populateStations() {
+async function populateStations() {
     const startSelect = document.getElementById('start');
     const destinationSelect = document.getElementById('destination');
-    
-    stationsList.forEach(station => {
-        const optionStart = document.createElement('option');
-        optionStart.value = station;
-        optionStart.textContent = station;
-        startSelect.appendChild(optionStart);
 
-        const optionDest = document.createElement('option');
-        optionDest.value = station;
-        optionDest.textContent = station;
-        destinationSelect.appendChild(optionDest);
-    });
+    try {
+        const response = await fetch(`${API_URL}/stations/stations`);
+        const stations = await response.json();
+
+        stations.forEach(station => {
+            const optionStart = document.createElement('option');
+            optionStart.value = station;
+            optionStart.textContent = station;
+            startSelect.appendChild(optionStart);
+
+            const optionDest = document.createElement('option');
+            optionDest.value = station;
+            optionDest.textContent = station;
+            destinationSelect.appendChild(optionDest);
+        });
+    } catch (error) {
+        console.error("Error fetching stations:", error);
+    }
 }
 
 function generateTimes(startTime, endTime, intervalMinutes, MODE) {
