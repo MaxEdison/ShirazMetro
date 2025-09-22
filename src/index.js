@@ -108,30 +108,23 @@ const getSchedule = (url) => {
     isForward,
   );
 
-  const scheduleData = {};
-  //  = holiday === "true"
-  //   ? isForward
-  //     ? scheduleTimesHolidayForward
-  //     : scheduleTimesHolidayBackward
-  //   : isForward
-  //     ? scheduleTimesForward
-  //     : scheduleTimesBackward;
-
+  let scheduleData = {};
+  var MODE;
 
   if (isForward){
     if (holiday) {
-      (scheduleData = scheduleTimesHolidayForward);
+      ({ start: startTime, end: endTime } = scheduleTimesHolidayForward[startStation]);
       MODE = 1; // Holiday Forward
     }else {
-      (scheduleData = scheduleTimesForward);
+      ({ start: startTime, end: endTime } = scheduleTimesForward[startStation]);
       MODE = 0; // Forward
     }
   } else {
     if (holiday) {
-      (scheduleData = scheduleTimesHolidayBackward);
+      ({ start: startTime, end: endTime } = scheduleTimesHolidayBackward[startStation]);
       MODE = 3; // Holiday Backward
     }else {
-      (scheduleData = scheduleTimesBackward);
+      ({ start: startTime, end: endTime } = scheduleTimesBackward[startStation]);
       MODE = 2; // Backward
     } 
   }
