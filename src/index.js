@@ -19,11 +19,25 @@ const calculateTripTime = (startIndex, destinationIndex, isForward) => {
   let tripTime = 0;
   if (isForward) {
     for (let i = startIndex + 1; i <= destinationIndex; i++) {
-      tripTime += i === 16 || i === 18 ? 4 : i === 17 ? 3 : i === 19 ? 1 : 2;
+      if (i === 16 || i === 18) {
+        tripTime += 4;
+      } else if (i === 17) {
+        tripTime += 3;
+      } else if (i === 19) {
+        tripTime += 1;
+      } else {
+        tripTime += 2;
+      }
     }
   } else {
     for (let i = startIndex - 1; i >= destinationIndex; i--) {
-      tripTime += i === 17 || i === 15 ? 4 : i === 12 ? 3 : 2;
+      if (i === 17 || i === 15) {
+        tripTime += 4;
+      } else if (i === 12) {
+        tripTime += 3;
+      } else {
+        tripTime += 2;
+      }
     }
   }
   return tripTime;
@@ -33,6 +47,7 @@ const generateTimes = (startTime, endTime, intervalMinutes) => {
   const times = [];
   let currentTime = new Date(`1970-01-01T${startTime}:00`);
   const endDate = new Date(`1970-01-01T${endTime}:00`);
+  
   while (currentTime <= endDate) {
     times.push(currentTime.toTimeString().substr(0, 5));
     currentTime.setMinutes(currentTime.getMinutes() + intervalMinutes);
