@@ -86,12 +86,12 @@ const getSchedule = (url) => {
   const { searchParams } = new URL(url);
   const startStation = searchParams.get('startStation');
   const destinationStation = searchParams.get('destinationStation');
-  const holidayCheck = searchParams.get('holiday')  === "true"; 
-
+  const holiday= searchParams.get('holiday'); 
+  console.log(holiday);
   // Validation
-  if (!startStation || !destinationStation || holidayCheck === null) {
+  if (!startStation || !destinationStation || !holiday || holiday != 'yes' && holiday != 'no') {
     return new Response(JSON.stringify({ 
-      error: 'startStation, destinationStation and holiday parameters are required' 
+      error: 'startStation, destinationStation and holiday(yes or no) parameters are required' 
     }), {
       status: 400,
       headers: {
@@ -100,8 +100,6 @@ const getSchedule = (url) => {
       }
     });
   }
-
-  const holiday = holidayCheck === "true";
 
   const isForward = stationsList.indexOf(startStation) < stationsList.indexOf(destinationStation);
   const tripDuration = calculateTripTime(
@@ -114,7 +112,7 @@ const getSchedule = (url) => {
   var MODE;
 
   if (isForward){
-    if (holiday) {
+    if (holiday === 'yes') {
       ({ start: startTime, end: endTime } = scheduleTimesHolidayForward[startStation]);
       MODE = 1; // Holiday Forward
     }else {
@@ -122,7 +120,7 @@ const getSchedule = (url) => {
       MODE = 0; // Forward
     }
   } else {
-    if (holiday) {
+    if (holiday === 'yes') {
       ({ start: startTime, end: endTime } = scheduleTimesHolidayBackward[startStation]);
       MODE = 3; // Holiday Backward
     }else {
@@ -136,7 +134,7 @@ const getSchedule = (url) => {
   // MODE = 1 ~> HOLIDAY FORWARD
   // MODE = 2 ~> BACKWARD
   // MODE = 3 ~> HOLIDAY BACKWARD
-
+  console.log(MODE);
   const startTimes = generateTimes(
     startTime,
     endTime,
