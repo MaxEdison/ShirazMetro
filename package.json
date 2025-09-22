@@ -1,5 +1,5 @@
 {
-  "name": "shirazmetro-api",
+  "name": "api",
   "version": "1.0.0",
   "description": "Shiraz Metro API for Cloudflare Workers",
   "main": "src/index.js",
