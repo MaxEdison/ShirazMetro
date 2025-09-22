@@ -217,45 +217,25 @@ function displaySchedule(schedule) {
     }
 }
 
-document.getElementById('calculate').addEventListener('click', function() {
+document.getElementById('calculate').addEventListener('click', async function() {
     const startStation = document.getElementById('start').value;
     const destinationStation = document.getElementById('destination').value;
     const isHoliday = document.getElementById('holiday').checked;
 
+    try {
+        const response = await fetch(
+            `${API_URL}/schedules/calculate?startStation=${encodeURIComponent(startStation)}&destinationStation=${encodeURIComponent(destinationStation)}&holiday=${isHoliday ? 'yes' : 'no'}`
+        );
 
-    const startIndex = stationsList.indexOf(startStation);
-    const destinationIndex = stationsList.indexOf(destinationStation);
-    const tripDuration = calculateTripTime(startIndex, destinationIndex);
+        if (!response.ok) {
+            throw new Error(`API error: ${response.status}`);
+        }
 
-    if (FORWARD){
-        if (isHoliday) {
-            ({ start: startTime, end: endTime } = scheduleTimesHolidayForward[startStation]);
-            MODE = 1; // Holiday Forward
-        }else {
-            ({ start: startTime, end: endTime } = scheduleTimesForward[startStation]);
-            MODE = 0; // Forward
-        }
-    } else {
-        if (isHoliday) {
-            ({ start: startTime, end: endTime } = scheduleTimesHolidayBackward[startStation]);
-            MODE = 3; // Holiday Backward
-        }else {
-            ({ start: startTime, end: endTime } = scheduleTimesBackward[startStation]);
-            MODE = 2; // Backward
-        }
+        const data = await response.json();
+        displaySchedule(data.schedule);
+    } catch (error) {
+        console.error("Error fetching schedule:", error);
     }
-
-
-    // Now it should set the mode in `generateTimes` function 
-    // MODE = 0 ~> FORWARD
-    // MODE = 1 ~> HOLIDAY FORWARD
-    // MODE = 2 ~> BACKWARD
-    // MODE = 3 ~> HOLIDAY BACKWARD
-
-    const schedule = generateTimes(startTime, endTime, 15, MODE);
-    const tripSchedule = addTripTime(schedule, tripDuration);
-
-    displaySchedule(tripSchedule);
 });
 
 
