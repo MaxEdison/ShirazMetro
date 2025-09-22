@@ -182,7 +182,7 @@ export default {
         version: '1.0.0',
         endpoints: {
           stations: '/api/v1/stations/stations',
-          schedules: '/api/v1/scedules/calculate?startStation=STATION&destinationStation=STATION&holiday=true/false'
+          schedules: '/api/v1/schedules/calculate?startStation=STATION&destinationStation=STATION&holiday=true/false'
         }
       }), {
         headers: {
@@ -196,7 +196,7 @@ export default {
       return getStations();
     }
 
-    if (pathname === '/api/v1/scedules/calculate') {
+    if (pathname === '/api/v1/schedules/calculate') {
       return getSchedule(request.url);
     }
 
