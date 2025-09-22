@@ -43,13 +43,19 @@ const calculateTripTime = (startIndex, destinationIndex, isForward) => {
   return tripTime;
 };
 
-const generateTimes = (startTime, endTime, intervalMinutes) => {
+const generateTimes = (startTime, endTime, intervalMinutes, MODE) => {
   const times = [];
   let currentTime = new Date(`1970-01-01T${startTime}:00`);
   const endDate = new Date(`1970-01-01T${endTime}:00`);
-  
-  while (currentTime <= endDate) {
-    times.push(currentTime.toTimeString().substr(0, 5));
+
+  for (let i = 0; currentTime <= endDate; i++) {
+    if (i === 0 && MODE === 0) {
+      intervalMinutes = 20;
+    } else {
+      intervalMinutes = 15;
+    }
+    const timeString = currentTime.toTimeString().substr(0, 5);
+    times[i] = timeString; 
     currentTime.setMinutes(currentTime.getMinutes() + intervalMinutes);
   }
   return times;
@@ -102,19 +108,48 @@ const getSchedule = (url) => {
     isForward,
   );
 
-  const scheduleData = holiday === "true"
-    ? isForward
-      ? scheduleTimesHolidayForward
-      : scheduleTimesHolidayBackward
-    : isForward
-      ? scheduleTimesForward
-      : scheduleTimesBackward;
+  const scheduleData = {};
+  //  = holiday === "true"
+  //   ? isForward
+  //     ? scheduleTimesHolidayForward
+  //     : scheduleTimesHolidayBackward
+  //   : isForward
+  //     ? scheduleTimesForward
+  //     : scheduleTimesBackward;
+
+
+  if (isForward){
+    if (holiday) {
+      (scheduleData = scheduleTimesHolidayForward);
+      MODE = 1; // Holiday Forward
+    }else {
+      (scheduleData = scheduleTimesForward);
+      MODE = 0; // Forward
+    }
+  } else {
+    if (holiday) {
+      (scheduleData = scheduleTimesHolidayBackward);
+      MODE = 3; // Holiday Backward
+    }else {
+      (scheduleData = scheduleTimesBackward);
+      MODE = 2; // Backward
+    } 
+  }
+
+  // Now it should set the mode in `generateTimes` function 
+  // MODE = 0 ~> FORWARD
+  // MODE = 1 ~> HOLIDAY FORWARD
+  // MODE = 2 ~> BACKWARD
+  // MODE = 3 ~> HOLIDAY BACKWARD
 
   const startTimes = generateTimes(
     scheduleData[startStation].start,
     scheduleData[startStation].end,
-    5,
+    15,
+    MODE,
   );
+
+
 
   const fullSchedule = addTripTime(startTimes, tripDuration);
 
