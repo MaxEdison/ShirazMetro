@@ -1,7 +1,7 @@
 # 🚇 ShirazMetro-API
 Files and configurations for deploying ShirazMetro API on CloudFlare Worker
 
-available on 👉 [https://shirazmetro-api.amirhossein-heidari-email.workers.dev](https://shirazmetro-api.amirhossein-heidari-email.workers.dev)
+available on 👉 [https://api.shiraz-metro.workers.dev/](https://api.shiraz-metro.workers.dev/)
 
 ## 👨‍💻 Main Developer
 
@@ -18,7 +18,7 @@ GET /api/v1/stations/stations
 
 **Example:**
 ```bash
-curl https://shirazmetro-api.amirhossein-heidari-email.workers.dev/api/v1/stations/stations
+curl https://api.shiraz-metro.workers.dev/api/v1/stations/stations
 ```
 
 **Response:**
@@ -49,7 +49,7 @@ GET /api/v1/scedules/calculate?startStation=STATION&destinationStation=STATION&h
 
 **Example:**
 ```bash
-curl "https://shirazmetro-api.amirhossein-heidari-email.workers.dev/api/v1/scedules/calculate?startStation=رازی&destinationStation=احسان&holiday=false"
+curl "https://api.shiraz-metro.workers.dev/api/v1/scedules/calculate?startStation=رازی&destinationStation=احسان&holiday=false"
 ```
 
 **Response Fields:**
