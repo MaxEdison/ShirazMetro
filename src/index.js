@@ -86,12 +86,12 @@ const getSchedule = (url) => {
   const { searchParams } = new URL(url);
   const startStation = searchParams.get('startStation');
   const destinationStation = searchParams.get('destinationStation');
-  const holiday = searchParams.get('holiday');
+  const holidayCheck = searchParams.get('holiday')  === "true"; 
 
   // Validation
-  if (!startStation || !destinationStation) {
+  if (!startStation || !destinationStation || holidayCheck === null) {
     return new Response(JSON.stringify({ 
-      error: 'startStation and destinationStation are required' 
+      error: 'startStation, destinationStation and holiday parameters are required' 
     }), {
       status: 400,
       headers: {
@@ -101,6 +101,8 @@ const getSchedule = (url) => {
     });
   }
 
+  const holiday = holidayCheck === "true";
+
   const isForward = stationsList.indexOf(startStation) < stationsList.indexOf(destinationStation);
   const tripDuration = calculateTripTime(
     stationsList.indexOf(startStation),
@@ -108,7 +110,7 @@ const getSchedule = (url) => {
     isForward,
   );
 
-  let scheduleData = {};
+  let startTime, endTime;
   var MODE;
 
   if (isForward){
