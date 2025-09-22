@@ -1,6 +1,3 @@
-const stationsList = ["شهید دستغیب", "شهید دوران", "فرصت شیرازی", "جانبازان", "غدیر", "رازی", "فضیلت", "کاوه", "ولیعصر", "وکیل الرعایا", "زندیه", "امام حسین", "نمازی", "شهید آوینی", "شهید مطهری", "قصردشت", "شاهد", "میرزای‌شیرازی", "دکتر شریعتی", "احسان"];
-
-
 const scheduleTimesForward = 
 {
         "شهید دستغیب": { "start": "05:20", "end": "22:10" },
@@ -119,76 +116,6 @@ async function populateStations() {
     }
 }
 
-function generateTimes(startTime, endTime, intervalMinutes, MODE) {
-    const times = [];
-    let currentTime = new Date(`1970-01-01T${startTime}:00`);
-    const endDate = new Date(`1970-01-01T${endTime}:00`);
-    
-    for (let i = 0; currentTime <= endDate; i++) {
-        if (i === 0 && MODE === 0) {
-            intervalMinutes = 20;
-        } else {
-            intervalMinutes = 15;
-        }
-        const timeString = currentTime.toTimeString().substr(0, 5);
-        times[i] = timeString; 
-        currentTime.setMinutes(currentTime.getMinutes() + intervalMinutes);
-    }
-    
-    return times;
-}
-
-let FORWARD = true;
-
-function calculateTripTime(startIndex, destinationIndex) {
-    let tripTime = 0;
-    if (startIndex < destinationIndex) 
-        {
-            for (let i = startIndex + 1; i <= destinationIndex; i++) {
-                if (i === 16 || i === 18) {
-                    tripTime += 4;
-                } else if (i === 17) {
-                    tripTime += 3;
-                } else if (i === 19) {
-                    tripTime += 1;
-                } else {
-                    tripTime += 2;
-                }
-            }
-        } else 
-        {
-            FORWARD = false;
-            for (let i = startIndex - 1; i >= destinationIndex; i--) 
-                {
-                    if (i === 17 || i === 15) 
-                    {
-                        tripTime += 4;
-                    } else if (i === 12) 
-                    {
-                        tripTime += 3;
-                    } else 
-                    {
-                        tripTime += 2;
-                    }
-                }
-        }
-    
-    
-    return tripTime;
-}
-
-
-function addTripTime(startTimes, tripDuration) {
-    return startTimes.map(startTime => {
-        const departure = new Date(`1970-01-01T${startTime}:00`);
-        const arrival = new Date(departure.getTime() + tripDuration * 60000);
-        const arrivalTime = arrival.toTimeString().substr(0, 5);
-        return {
-            departure: startTime,
-            arrival: arrivalTime
-        };
-    });
-}
 
 function checkSelection() {
     const startStation = document.getElementById('start').value;
