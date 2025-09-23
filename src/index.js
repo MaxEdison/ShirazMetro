@@ -14,45 +14,79 @@ const corsHeaders = {
   'Access-Control-Allow-Headers': 'Content-Type, Authorization',
 };
 
+
+function timeToDate(timeStr) {
+    const [hours, minutes] = timeStr.split(":").map(Number);
+    const date = new Date();
+    date.setHours(hours, minutes, 0, 0);
+    return date;
+}
+
+// Calculate sequential durations in minutes
+function calculateClockDistances(schedule) {
+    const stations = Object.keys(schedule);
+    const distances = {};
+
+    for (let i = 1; i < stations.length; i++) {
+        const prevStation = stations[i - 1];
+        const currStation = stations[i];
+
+        let prevTime = timeToDate(schedule[prevStation].start);
+        let currTime = timeToDate(schedule[currStation].start);
+
+        // Calculate absolute difference in minutes, because Backward schedule can have earlier times
+        let duration = Math.abs((currTime - prevTime) / 60000);
+        distances[i-0] = duration;
+    }
+
+    return distances;
+}
+
+
 // Utility functions
-const calculateTripTime = (startIndex, destinationIndex, isForward) => {
+const calculateTripTime = (startStation, destinationStation, isForward, line) => {
   let tripTime = 0;
+  
+  const durations = calculateClockDistances(
+    isForward ? scheduleTimesForward[line] : scheduleTimesBackward[line]
+  );
+  
+
   if (isForward) {
+    const stations = Object.keys(scheduleTimesForward[line]);
+    const startIndex = stations.indexOf(startStation);
+    const destinationIndex = stations.indexOf(destinationStation);
+
     for (let i = startIndex + 1; i <= destinationIndex; i++) {
-      if (i === 16 || i === 18) {
-        tripTime += 4;
-      } else if (i === 17) {
-        tripTime += 3;
-      } else if (i === 19) {
-        tripTime += 1;
-      } else {
-        tripTime += 2;
-      }
+      tripTime += durations[i]; 
     }
+    
   } else {
-    for (let i = startIndex - 1; i >= destinationIndex; i--) {
-      if (i === 17 || i === 15) {
-        tripTime += 4;
-      } else if (i === 12) {
-        tripTime += 3;
-      } else {
-        tripTime += 2;
-      }
+    
+    const stations = Object.keys(scheduleTimesBackward[line]);
+    const startIndex = stations.indexOf(startStation);
+    const destinationIndex = stations.indexOf(destinationStation);
+
+    for (let i = startIndex + 1; i <= destinationIndex; i++) {
+      tripTime += durations[i]; 
     }
+
   }
   return tripTime;
 };
 
-const generateTimes = (startTime, endTime, intervalMinutes, MODE) => {
+const generateTimes = (startTime, endTime, intervalMinutes, MODE, line) => {
   const times = [];
   let currentTime = new Date(`1970-01-01T${startTime}:00`);
   const endDate = new Date(`1970-01-01T${endTime}:00`);
 
   for (let i = 0; currentTime <= endDate; i++) {
-    if (i === 0 && MODE === 0) {
-      intervalMinutes = 20;
-    } else {
-      intervalMinutes = 15;
+    if (line === 'line1') {
+      if (i === 0 && MODE === 0) {
+        intervalMinutes = 20;
+      } else {
+        intervalMinutes = 15; 
+      }
     }
     const timeString = currentTime.toTimeString().substr(0, 5);
     times[i] = timeString; 
@@ -86,9 +120,10 @@ const getSchedule = (url) => {
   const { searchParams } = new URL(url);
   const startStation = searchParams.get('startStation');
   const destinationStation = searchParams.get('destinationStation');
-  const holiday= searchParams.get('holiday'); 
-  console.log(holiday);
-  // Validation
+  const holiday = searchParams.get('holiday'); 
+  const line = searchParams.get('line');
+
+
   if (!startStation || !destinationStation || !holiday || holiday != 'yes' && holiday != 'no') {
     return new Response(JSON.stringify({ 
       error: 'startStation, destinationStation and holiday(yes or no) parameters are required' 
@@ -101,11 +136,14 @@ const getSchedule = (url) => {
     });
   }
 
-  const isForward = stationsList.indexOf(startStation) < stationsList.indexOf(destinationStation);
+  const stations = stationsList[line].stations;
+
+  const isForward = stations.indexOf(startStation) < stations.indexOf(destinationStation);
   const tripDuration = calculateTripTime(
-    stationsList.indexOf(startStation),
-    stationsList.indexOf(destinationStation),
+    startStation,
+    destinationStation,
     isForward,
+    line,
   );
 
   let startTime, endTime;
@@ -113,18 +151,18 @@ const getSchedule = (url) => {
 
   if (isForward){
     if (holiday === 'yes') {
-      ({ start: startTime, end: endTime } = scheduleTimesHolidayForward[startStation]);
+      ({ start: startTime, end: endTime } = scheduleTimesHolidayForward[line][startStation]);
       MODE = 1; // Holiday Forward
     }else {
-      ({ start: startTime, end: endTime } = scheduleTimesForward[startStation]);
+      ({ start: startTime, end: endTime } = scheduleTimesForward[line][startStation]);
       MODE = 0; // Forward
     }
   } else {
     if (holiday === 'yes') {
-      ({ start: startTime, end: endTime } = scheduleTimesHolidayBackward[startStation]);
+      ({ start: startTime, end: endTime } = scheduleTimesHolidayBackward[line][startStation]);
       MODE = 3; // Holiday Backward
     }else {
-      ({ start: startTime, end: endTime } = scheduleTimesBackward[startStation]);
+      ({ start: startTime, end: endTime } = scheduleTimesBackward[line][startStation]);
       MODE = 2; // Backward
     } 
   }
@@ -134,14 +172,14 @@ const getSchedule = (url) => {
   // MODE = 1 ~> HOLIDAY FORWARD
   // MODE = 2 ~> BACKWARD
   // MODE = 3 ~> HOLIDAY BACKWARD
-  console.log(MODE);
+
   const startTimes = generateTimes(
     startTime,
     endTime,
-    15,
+    stationsList[line].interval_time,
     MODE,
+    line,
   );
-
 
 
   const fullSchedule = addTripTime(startTimes, tripDuration);
@@ -180,7 +218,7 @@ export default {
         version: '1.0.0',
         endpoints: {
           stations: '/api/v1/stations/stations',
-          schedules: '/api/v1/schedules/calculate?startStation=STATION&destinationStation=STATION&holiday=true/false'
+          schedules: '/api/v1/schedules/calculate?startStation=STATION&destinationStation=STATION&holiday=yes/no,line=line1/line2'
         }
       }), {
         headers: {
