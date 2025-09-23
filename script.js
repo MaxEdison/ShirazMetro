@@ -1,6 +1,7 @@
 const API_URL = "http://localhost:8787/api/v1";
 
 let metroData = {};
+let line = "line1";
 
 async function fetchStations() {
     try {
@@ -31,38 +32,6 @@ function loadStations(line) {
         destinationSelect.appendChild(optionDest);
     });
 }
-
-document.addEventListener('DOMContentLoaded', () => {
-    fetchStations();
-
-    const tabs = document.querySelectorAll('.switch-btn');
-    const slider = document.querySelector('.switch-slider');
-
-    tabs.forEach((tab, index) => {
-        tab.addEventListener('click', () => {
-            tabs.forEach(t => t.classList.remove('active'));
-            tab.classList.add('active');
-
-            slider.style.right = `${index * 50}%`;
-
-            if (tab.dataset.line === "line1") {
-                slider.style.background = "#db0000"; 
-                document.querySelector('.label-text').textContent = "روز تعطیل یا پنجشنبه ؟";
-            } else if (tab.dataset.line === "line2") {
-                slider.style.background = "#047a00ff";
-                document.querySelector('.label-text').textContent = "روز تعطیل؟";
-                
-            }
-
-            loadStations(tab.dataset.line);
-        });
-    });
-
-});
-
-
-
-
 
 function checkSelection() {
     const startStation = document.getElementById('start').value;
@@ -164,6 +133,37 @@ function displaySchedule(schedule) {
     }
 }
 
+document.addEventListener('DOMContentLoaded', () => {
+    fetchStations();
+
+    const tabs = document.querySelectorAll('.switch-btn');
+    const slider = document.querySelector('.switch-slider');
+
+    tabs.forEach((tab, index) => {
+        tab.addEventListener('click', () => {
+            tabs.forEach(t => t.classList.remove('active'));
+            tab.classList.add('active');
+
+            slider.style.right = `${index * 50}%`;
+
+            line = tab.dataset.line;
+
+            if (line === "line1") {
+                slider.style.background = "#db0000"; 
+                document.querySelector('.label-text').textContent = "روز تعطیل یا پنجشنبه ؟";
+            } else if (line === "line2") {
+                slider.style.background = "#047a00ff";
+                document.querySelector('.label-text').textContent = "روز تعطیل؟";
+                
+            }
+
+
+            loadStations(line);
+        });
+    });
+
+});
+
 document.getElementById('calculate').addEventListener('click', async function() {
     const startStation = document.getElementById('start').value;
     const destinationStation = document.getElementById('destination').value;
@@ -171,7 +171,7 @@ document.getElementById('calculate').addEventListener('click', async function() 
 
     try {
         const response = await fetch(
-            `${API_URL}/schedules/calculate?startStation=${encodeURIComponent(startStation)}&destinationStation=${encodeURIComponent(destinationStation)}&holiday=${isHoliday ? 'yes' : 'no'}`
+            `${API_URL}/schedules/calculate?startStation=${encodeURIComponent(startStation)}&destinationStation=${encodeURIComponent(destinationStation)}&holiday=${isHoliday ? 'yes' : 'no'}&line=${encodeURIComponent(line)}`
         );
 
         if (!response.ok) {
