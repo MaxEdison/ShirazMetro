@@ -352,3 +352,12 @@ label {
 .switch-btn.active {
     color: #ffffff;
 }
+
+
+.no-service {
+    background-color: #db0000;
+    color: #ffffff;
+    text-align: center;
+    font-weight: normal;
+    border-radius: 6px;
+}
