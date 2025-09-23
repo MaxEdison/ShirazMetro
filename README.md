@@ -39,17 +39,18 @@ Get travel time and schedule between two stations.
 
 **Endpoint:**
 ```
-GET /api/v1/schedules/calculate?startStation=STATION&destinationStation=STATION&holiday=yes/no
+GET /api/v1/schedules/calculate?startStation=STATION&destinationStation=STATION&holiday=yes/no&line=line1/line2
 ```
 
 **Parameters:**
 - `startStation` – starting station name (string in Farsi)  
 - `destinationStation` – destination station name (string in Farsi)  
 - `holiday` – whether to calculate for holiday schedule (`yes` or `no`)  
+- `line` - select line (`line1` or `line2`)
 
 **Example:**
 ```bash
-curl "https://api.shiraz-metro.workers.dev/api/v1/schedules/calculate?startStation=رازی&destinationStation=احسان&holiday=no"
+curl "https://api.shiraz-metro.workers.dev/api/v1/schedules/calculate?startStation=رازی&destinationStation=احسان&holiday=no&line=line1"
 ```
 
 **Response Fields:**
