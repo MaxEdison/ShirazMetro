@@ -96,7 +96,12 @@ export const scheduleTimesHolidayForward = {
         "دکتر شریعتی": { "start": "07:50", "end": "21:50" },
     },
 
-    line2: {},
+    line2: {
+        "قهرمانان": { "start": "", "end": "" },
+        "عادل آباد": { "start": "", "end": "" },
+        "بسیج": { "start": "", "end": "" },
+        "امام حسین": { "start": "",}
+    },
 };
 
 export const scheduleTimesBackward = 
@@ -155,5 +160,10 @@ export const scheduleTimesHolidayBackward = {
         "شهید دوران": { "start": "07:46", "end": "21:46" },
     },
 
-    line2: {},
+    line2: {
+        "امام حسین": { "start": "", "end": "" },
+        "بسیج": { "start": "", "end": "" },
+        "عادل آباد": { "start": "", "end": "" },
+        "قهرمانان": { "start": "",}
+    },
 };
