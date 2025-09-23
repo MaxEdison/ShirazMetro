@@ -129,7 +129,12 @@ function displaySchedule(schedule) {
             }
         }, 100);               
     } else {
-        scheduleContainer.classList.remove('show');
+        scheduleContainer.classList.add('show');
+
+        const noServiceItem = document.createElement('div');
+        noServiceItem.className = 'no-service';
+        noServiceItem.textContent = "مترو در این روز خدمات رسانی ندارد.";
+        scheduleContainer.appendChild(noServiceItem);
     }
 }
 
