@@ -57,85 +57,88 @@ function displaySchedule(schedule) {
     let nextTrainItem = null;
     let hasResults = false;
     let currentTimeFound = false;
-
-    schedule.forEach(({ departure, arrival }) => {
-        const [depHours, depMinutes] = departure.split(':').map(Number);
-        const [arrHours, arrMinutes] = arrival.split(':').map(Number);
-        
-        const departureTime = depHours * 60 + depMinutes;
-        const arrivalTime = arrHours * 60 + arrMinutes;
-
-        let status = 'missed';
-        let isCurrentTime = false;
-        let isNearTime = false;
-        
-        if (departureTime > nowTime) {
-            status = 'future';
-            const timeDiff = departureTime - nowTime;
-
-            if (timeDiff <= 2 && timeDiff >= 0) {
-                isCurrentTime = true;
-                isNearTime = true;
-                currentTimeFound = true;
-            }
-
-            if (!nextTrainItem) {
-                nextTrainItem = true;
-            }
-        }
-
-        const scheduleItem = document.createElement('div');
-        scheduleItem.className = `schedule-item ${status}`;
-
-        if (isCurrentTime) {
-            scheduleItem.classList.add('current-time');
-        }
-
-        if (isNearTime) {
-            scheduleItem.classList.add('near-time');
-        }
-
-        if (status === 'future' && nextTrainItem === true) {
-            scheduleItem.id = 'next-train';
-            nextTrainItem = scheduleItem;
-        }
-
-        scheduleItem.innerHTML = `
-            <span class="departure-time">حرکت‌ازمبدا: ${departure}</span>
-            <span class="arrival-time">رسیدن‌به‌مقصد: ${arrival}</span>
-        `;
-        scheduleContainer.appendChild(scheduleItem);
-        hasResults = true;
-    });
-
-    if (hasResults) {
-        scheduleContainer.classList.add('show');
-
-        setTimeout(() => {
-            let targetElement = null;
-            const currentTimeElement = scheduleContainer.querySelector('.current-time');
-
-            if (currentTimeElement) {
-                targetElement = currentTimeElement;
-            } else if (nextTrainItem && nextTrainItem !== true) {
-                targetElement = nextTrainItem;
-            }
-
-            if (targetElement) {
-                 targetElement.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'center'
-                });
-            }
-        }, 100);               
-    } else {
-        scheduleContainer.classList.add('show');
-
+    if (schedule.length === 0) {
         const noServiceItem = document.createElement('div');
-        noServiceItem.className = 'no-service';
-        noServiceItem.textContent = "مترو در این روز خدمات رسانی ندارد.";
+        noServiceItem.className = 'schedule-item no-service';
+        noServiceItem.textContent = "مترو در این روز خدمات رسانی ندارد";
         scheduleContainer.appendChild(noServiceItem);
+    } else{
+
+        schedule.forEach(({ departure, arrival }) => {
+            const [depHours, depMinutes] = departure.split(':').map(Number);
+            const [arrHours, arrMinutes] = arrival.split(':').map(Number);
+            
+            const departureTime = depHours * 60 + depMinutes;
+            const arrivalTime = arrHours * 60 + arrMinutes;
+    
+            let status = 'missed';
+            let isCurrentTime = false;
+            let isNearTime = false;
+            
+            if (departureTime > nowTime) {
+                status = 'future';
+                const timeDiff = departureTime - nowTime;
+    
+                if (timeDiff <= 2 && timeDiff >= 0) {
+                    isCurrentTime = true;
+                    isNearTime = true;
+                    currentTimeFound = true;
+                }
+    
+                if (!nextTrainItem) {
+                    nextTrainItem = true;
+                }
+            }
+    
+            const scheduleItem = document.createElement('div');
+            scheduleItem.className = `schedule-item ${status}`;
+    
+            if (isCurrentTime) {
+                scheduleItem.classList.add('current-time');
+            }
+    
+            if (isNearTime) {
+                scheduleItem.classList.add('near-time');
+            }
+    
+            if (status === 'future' && nextTrainItem === true) {
+                scheduleItem.id = 'next-train';
+                nextTrainItem = scheduleItem;
+            }
+    
+            scheduleItem.innerHTML = `
+                <span class="departure-time">حرکت‌ازمبدا: ${departure}</span>
+                <span class="arrival-time">رسیدن‌به‌مقصد: ${arrival}</span>
+            `;
+            scheduleContainer.appendChild(scheduleItem);
+            hasResults = true;
+        });
+    
+        if (hasResults) {
+            scheduleContainer.classList.add('show');
+    
+            setTimeout(() => {
+                let targetElement = null;
+                const currentTimeElement = scheduleContainer.querySelector('.current-time');
+    
+                if (currentTimeElement) {
+                    targetElement = currentTimeElement;
+                } else if (nextTrainItem && nextTrainItem !== true) {
+                    targetElement = nextTrainItem;
+                }
+    
+                if (targetElement) {
+                     targetElement.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'center'
+                    });
+                }
+            }, 100);               
+        } else {
+            scheduleContainer.classList.remove('show');
+        }
     }
+
 }
 
 document.addEventListener('DOMContentLoaded', () => {
