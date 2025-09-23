@@ -184,6 +184,3 @@ document.getElementById('calculate').addEventListener('click', async function() 
         console.error("Error fetching schedule:", error);
     }
 });
-
-
-populateStations();
