@@ -47,8 +47,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (tab.dataset.line === "line1") {
                 slider.style.background = "#db0000"; 
+                document.querySelector('.label-text').textContent = "روز تعطیل یا پنجشنبه ؟";
             } else if (tab.dataset.line === "line2") {
                 slider.style.background = "#047a00ff";
+                document.querySelector('.label-text').textContent = "روز تعطیل؟";
+                
             }
 
             loadStations(tab.dataset.line);
