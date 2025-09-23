@@ -55,6 +55,13 @@
     <div id="trip-container">
         <h2>زمان‌بندی مترو شیراز</h2>
 
+        <div class="switch-tabs">
+            <div class="switch-slider"></div>
+            <button class="switch-btn active" data-line="line1">خط ۱</button>
+            <button class="switch-btn" data-line="line2">خط ۲</button>
+        </div>
+
+        
         <select id="start" onchange="checkSelection()">
             <option value="">انتخاب ایستگاه مبدا</option>
         </select>
@@ -64,7 +71,7 @@
         </select>
         
         <label class="checkbox-container">
-                            روز تعطیل یا پنجشنبه ؟
+            <span class="label-text">روز تعطیل یا پنجشنبه ؟</span>
             <input type="checkbox" id="holiday">
             <span class="checkmark"></span>
         </label>
