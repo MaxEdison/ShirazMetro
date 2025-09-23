@@ -1,28 +1,64 @@
-const API_URL = "https://api.shiraz-metro.workers.dev/api/v1";
+const API_URL = "http://localhost:8787/api/v1";
 
-async function populateStations() {
-    const startSelect = document.getElementById('start');
-    const destinationSelect = document.getElementById('destination');
+let metroData = {};
 
+async function fetchStations() {
     try {
         const response = await fetch(`${API_URL}/stations/stations`);
-        const stations = await response.json();
-
-        stations.forEach(station => {
-            const optionStart = document.createElement('option');
-            optionStart.value = station;
-            optionStart.textContent = station;
-            startSelect.appendChild(optionStart);
-
-            const optionDest = document.createElement('option');
-            optionDest.value = station;
-            optionDest.textContent = station;
-            destinationSelect.appendChild(optionDest);
-        });
+        metroData = await response.json();
+        loadStations('line1'); 
     } catch (error) {
         console.error("Error fetching stations:", error);
     }
 }
+
+function loadStations(line) {
+    const startSelect = document.getElementById('start');
+    const destinationSelect = document.getElementById('destination');
+
+    startSelect.innerHTML = '<option value="">انتخاب ایستگاه مبدا</option>';
+    destinationSelect.innerHTML = '<option value="">انتخاب ایستگاه مقصد</option>';
+
+    metroData[line].stations.forEach(station => {
+        const optionStart = document.createElement('option');
+        optionStart.value = station;
+        optionStart.textContent = station;
+        startSelect.appendChild(optionStart);
+
+        const optionDest = document.createElement('option');
+        optionDest.value = station;
+        optionDest.textContent = station;
+        destinationSelect.appendChild(optionDest);
+    });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    fetchStations();
+
+    const tabs = document.querySelectorAll('.switch-btn');
+    const slider = document.querySelector('.switch-slider');
+
+    tabs.forEach((tab, index) => {
+        tab.addEventListener('click', () => {
+            tabs.forEach(t => t.classList.remove('active'));
+            tab.classList.add('active');
+
+            slider.style.right = `${index * 50}%`;
+
+            if (tab.dataset.line === "line1") {
+                slider.style.background = "#db0000"; 
+            } else if (tab.dataset.line === "line2") {
+                slider.style.background = "#047a00ff";
+            }
+
+            loadStations(tab.dataset.line);
+        });
+    });
+
+});
+
+
+
 
 
 function checkSelection() {

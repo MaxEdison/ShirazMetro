@@ -193,7 +193,7 @@ label {
     display: block;
 }
 
-button {
+#calculate {
     background-color: #BB86FC;
     font-family: 'vazir', sans-serif;
     color: #121212;
@@ -202,13 +202,13 @@ button {
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-button:disabled {
+#calculate:disabled {
     background-color: #5C5C5C;
     font-family: 'vazir', sans-serif;
     cursor: not-allowed;
 }
 
-button:hover:not(:disabled) {
+#claculate:hover:not(:disabled) {
     background-color: #9C4DFF;
     font-family: 'vazir', sans-serif;
 }
@@ -315,4 +315,40 @@ button:hover:not(:disabled) {
         font-family: 'vazir', sans-serif;
         padding: 10px;
     }
+}
+
+.switch-tabs {
+    display: flex;
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    margin: 1rem 0;
+}
+
+.switch-slider {
+    position: absolute;
+    top: 0;
+    bottom: 15px;
+    width: 50%;
+    background: #db0000; 
+    transition: right 0.25s ease;
+    border-radius: 10px;
+    z-index: 1;
+}
+
+.switch-btn {
+    flex: 1;
+    z-index: 2;
+    border: none;
+    background: transparent;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #bbb;
+    padding: 0.7rem 0;
+    cursor: pointer;
+    transition: color 0.25s ease;
+}
+
+.switch-btn.active {
+    color: #ffffff;
 }
