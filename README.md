@@ -39,17 +39,17 @@ Get travel time and schedule between two stations.
 
 **Endpoint:**
 ```
-GET /api/v1/schedules/calculate?startStation=STATION&destinationStation=STATION&holiday=true/false
+GET /api/v1/schedules/calculate?startStation=STATION&destinationStation=STATION&holiday=yes/no
 ```
 
 **Parameters:**
 - `startStation` – starting station name (string in Farsi)  
 - `destinationStation` – destination station name (string in Farsi)  
-- `holiday` – whether to calculate for holiday schedule (`true` or `false`)  
+- `holiday` – whether to calculate for holiday schedule (`yes` or `no`)  
 
 **Example:**
 ```bash
-curl "https://api.shiraz-metro.workers.dev/api/v1/schedules/calculate?startStation=رازی&destinationStation=احسان&holiday=false"
+curl "https://api.shiraz-metro.workers.dev/api/v1/schedules/calculate?startStation=رازی&destinationStation=احسان&holiday=no"
 ```
 
 **Response Fields:**
@@ -58,7 +58,11 @@ curl "https://api.shiraz-metro.workers.dev/api/v1/schedules/calculate?startStati
 - `schedule` *(array of objects)* → A list of available trips between the two stations.  
   - `departure` *(string, HH:MM)* → Time when the train leaves the start station.  
   - `arrival` *(string, HH:MM)* → Time when the train arrives at the destination.  
-- `tripDuration` *(number)* → Duration of the trip in minutes (same for all listed trips).  
+- `tripDuration` *(number)* → Duration of the trip in minutes (same for all listed trips).
+
+  
+
+⚠️ NOTE: This response is just for example and not real.
 
 **Response:**
 ```json
