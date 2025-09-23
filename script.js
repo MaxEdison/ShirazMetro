@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:8787/api/v1";
+const API_URL = "https://api.shiraz-metro.workers.dev/api/v1";
 
 let metroData = {};
 let line = "line1";
