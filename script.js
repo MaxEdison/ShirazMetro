@@ -159,10 +159,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (line === "line1") {
                 slider.style.background = "#db0000"; 
-                document.querySelector('.label-text').textContent = "روز تعطیل یا پنجشنبه ؟";
+                // document.querySelector('.label-text').textContent = "روز تعطیل یا پنجشنبه ؟";
             } else if (line === "line2") {
                 slider.style.background = "#047a00ff";
-                document.querySelector('.label-text').textContent = "روز تعطیل؟";
+                // document.querySelector('.label-text').textContent = "روز تعطیل؟";
                 
             }
 
