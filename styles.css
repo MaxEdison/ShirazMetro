@@ -361,3 +361,9 @@ label {
     font-weight: normal;
     border-radius: 6px;
 }
+
+
+.footer {
+    width: inherit;
+    text-align: center;
+}
