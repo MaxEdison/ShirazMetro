@@ -60,6 +60,7 @@ function displaySchedule(schedule) {
     if (schedule.length === 0) {
         const noServiceItem = document.createElement('div');
         noServiceItem.className = 'schedule-item no-service';
+        scheduleContainer.classList.add('show')
         noServiceItem.textContent = "مترو در این روز خدمات رسانی ندارد";
         scheduleContainer.appendChild(noServiceItem);
     } else{
