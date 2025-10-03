@@ -60,6 +60,7 @@ function displaySchedule(schedule) {
     if (schedule.length === 0) {
         const noServiceItem = document.createElement('div');
         noServiceItem.className = 'schedule-item no-service';
+        scheduleContainer.classList.add('show')
         noServiceItem.textContent = "مترو در این روز خدمات رسانی ندارد";
         scheduleContainer.appendChild(noServiceItem);
     } else{
@@ -158,10 +159,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (line === "line1") {
                 slider.style.background = "#db0000"; 
-                document.querySelector('.label-text').textContent = "روز تعطیل یا پنجشنبه ؟";
+                // document.querySelector('.label-text').textContent = "روز تعطیل یا پنجشنبه ؟";
             } else if (line === "line2") {
                 slider.style.background = "#047a00ff";
-                document.querySelector('.label-text').textContent = "روز تعطیل؟";
+                // document.querySelector('.label-text').textContent = "روز تعطیل؟";
                 
             }
 

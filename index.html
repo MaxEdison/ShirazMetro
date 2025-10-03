@@ -43,13 +43,14 @@
 
 
 
+    
     <div id="warning-box">
         <h2> خدمت رسانی رایگان مترو شیراز </h2>
         <p> 
-            به مناسبت آغاز مهر ماه و بازگشایی مدارس، خدمت رسانی مترو در خط یک از تاریخ 1 مهر تا 7 مهر به صورت رایگان می باشد. <br>
-            همچنین از اول مهر ماه تا اطلاع ثانوی، خدمات رسانی مترو در خط دو به صورت رایگان خواهد بود. <br>
+            .از اول مهر ماه تا اطلاع ثانوی، خدمات رسانی مترو در خط دو به صورت رایگان خواهد بود
         </p>
     </div> 
+    
 
 
 
@@ -58,8 +59,8 @@
 
         <div class="switch-tabs">
             <div class="switch-slider"></div>
-            <button class="switch-btn active" data-line="line1">خط ۱</button>
-            <button class="switch-btn" data-line="line2">خط ۲</button>
+            <button class="switch-btn active" data-line="line1" onclick="checkSelection()">خط ۱</button>
+            <button class="switch-btn" data-line="line2" onclick="checkSelection()">خط ۲</button>
         </div>
 
         
@@ -72,7 +73,7 @@
         </select>
         
         <label class="checkbox-container">
-            <span class="label-text">روز تعطیل یا پنجشنبه ؟</span>
+            <span class="label-text">روز تعطیل؟</span>
             <input type="checkbox" id="holiday">
             <span class="checkmark"></span>
         </label>
