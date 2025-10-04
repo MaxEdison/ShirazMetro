@@ -367,3 +367,7 @@ label {
     width: inherit;
     text-align: center;
 }
+
+.footer a {
+    color: #BB86FC;
+}
