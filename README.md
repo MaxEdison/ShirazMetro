@@ -62,7 +62,7 @@ you have to send a request (a simple GET request) to get the full scheduel for e
 1. Clone the repository to your local machine:
 
    ```bash
-    git clone https://github.com/your-username/ShirazMetro.git
+    git clone https://github.com/MaxEdison/ShirazMetro.git
    ```
 
 2. Navigate to the project directory:
@@ -102,6 +102,7 @@ To run this project, you will need to add the following environment variables to
 
 - [@MaxEdison](https://github.com/MaxEdison)
 - [@ParsaBordbar](https://github.com/ParsaBordbar)
+- [@metemaddar](https://github.com/metemaddar)
 
 
 ## Contributing

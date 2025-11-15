@@ -3,33 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>برنامه‌ریز سفر مترو شیراز</title>
+    <title>زمان‌بندی مترو شیراز</title>
     <link rel="stylesheet" href="styles.css">
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="زمان‌بندی مترو شیراز | زمان‌بندی دقیق حرکت قطارها بین ایستگاه‌ها، با درنظر گرفتن روزهای تعطیل. سریع، ساده و همیشه در دسترس.">
+    <meta name="keywords" content="مترو شیراز, زمان‌بندی مترو, برنامه‌ریزی سفر, ایستگاه مترو, حمل و نقل عمومی, Shiraz Metro, برنامه مترو شیراز, زمانبندی مترو, زمان بندی مترو شیراز">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="Max Edison">
+
+    <!-- Logo - icon -->
+    <link rel="icon" href="/icons/logo-icon.png" type="image/x-icon">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:title" content="زمان‌بندی مترو شیراز">
+    <meta property="og:description" content="زمان‌بندی دقیق حرکت قطارها بین ایستگاه‌های مترو شیراز، مناسب برای روزهای کاری و تعطیل. تجربه‌ای سریع و کاربرپسند.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="/photos/poster-shirazmetro.jpg" alt="پوستر مترو شیراز">
+
+
+
+    <!-- Twitter -->
+    <meta name="twitter:title" content="زمان‌بندی مترو شیراز">
+    <meta name="twitter:description" content="برنامه‌ریزی آسان و سریع سفر با مترو در شیراز. فقط مبدا و مقصد رو انتخاب کن!">
+
+    <!-- Canonical Tags -->
+    <link rel="canonical" href="https://metro.sudoshz.ir/">
+    
+
 </head>
 
 <body>
-    <div id="contact-box">
-
-        <a href="https://github.com/MaxEdison" target="_blank" title="GitHub">
-            <img src="icons/github.svg" alt="GitHub">
-        </a>
-
-        <a href="https://t.me/MaxEdison" target="_blank" title="Telegram">
-            <img src="icons/telegram.svg" alt="Telegram">
-        </a>
-
-        <a href="https://www.linkedin.com/in/MaxEdison" target="_blank" title="LinkedIn">
-            <img src="icons/linkedin.svg" alt="LinkedIn">
-        </a>
-        
-        <!-- <a href="https://www.x.com/MaxEdison021" target="_blank" title="X(formerly Twitter)">
-            <img src="icons/twitter-original.svg" alt="X(formerly Twitter)">
-        </a> -->
-    </div>
+    
+    <div id="warning-box">
+        <h2> خدمت رسانی رایگان مترو شیراز </h2>
+        <p> 
+            .از اول مهر ماه تا اطلاع ثانوی، خدمات رسانی مترو در خط دو به صورت رایگان خواهد بود
+        </p>
+    </div> 
+    
 
     <div id="trip-container">
-        <h2>برنامه‌ریزی سفر مترو شیراز</h2>
+        <h1>زمان‌بندی مترو شیراز</h1>
 
+        <div class="switch-tabs">
+            <div class="switch-slider"></div>
+            <button class="switch-btn active" data-line="line1" onclick="checkSelection()">خط ۱</button>
+            <button class="switch-btn" data-line="line2" onclick="checkSelection()">خط ۲</button>
+        </div>
+
+        
         <select id="start" onchange="checkSelection()">
             <option value="">انتخاب ایستگاه مبدا</option>
         </select>
@@ -39,7 +61,7 @@
         </select>
         
         <label class="checkbox-container">
-                            روز تعطیل؟
+            <span class="label-text">روز تعطیل؟</span>
             <input type="checkbox" id="holiday">
             <span class="checkmark"></span>
         </label>
@@ -48,9 +70,57 @@
 
         <div id="schedule"></div>
 
+
+
     </div>
 
-    <script src="script.js"></script>
+    <div class="footer">
+        <p> ساخته شده با ❤️ توسط جامعه برای جامعه
+        <br> این وبسایت یک 
+            <a href="https://sudoshz.ir/what-is-free-software/" target="_blank"> نرم افزار آزاد </a>  
+            است.  
+        </p>
 
+        <p>
+            قدرت گرفته از:
+            <br>
+            <a href="https://sudoshz.ir/" target="_blank">  Shiraz Linux  </a>
+            | <a href="https://pages.github.com/" target="_blank">    GitHub Pages </a>
+            | <a href="https://workers.cloudflare.com/" target="_blank">  CloudFlare Workers </a>
+        </p>
+
+
+        <!-- <div id="contact-box"> -->
+        <a href="https://github.com/MaxEdison" target="_blank" title="GitHub">
+            <img src="icons/github.svg" alt="GitHub">
+        </a>
+
+        <a href="https://t.me/MaxEdison" target="_blank" title="Telegram">
+            <img src="icons/telegram.svg" alt="Telegram">
+        </a>
+
+        <!-- <a href="https://www.linkedin.com/in/MaxEdison" target="_blank" title="LinkedIn">
+            <img src="icons/linkedin.svg" alt="LinkedIn">
+        </a> -->
+        
+        <!-- <a href="https://www.x.com/MaxEdison021" target="_blank" title="X(formerly Twitter)">
+            <img src="icons/twitter-original.svg" alt="X(formerly Twitter)">
+        </a> -->
+        <!-- </div> -->
+    </div>
+    
+    <script src="script.js"></script>
+    <script defer src="https://cloud.umami.is/script.js" data-website-id="dc3d9773-0483-4347-914c-ee4f781a1c2f"></script>
+    <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          "name": "زمان‌بندی مترو شیراز",
+          "url": "https://metro.sudoshz.ir",
+          "description": "زمان‌بندی دقیق مترو شیراز"
+        }
+    </script>
+        
+        
 </body>
 </html>
