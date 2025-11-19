@@ -353,3 +353,89 @@ label {
 .footer a {
     color: #BB86FC;
 }
+
+
+
+#contributors-box {
+    max-width: 350px;
+    width: 100%;
+    background-color: #1F1F1F;
+    padding: 20 sekit;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    margin: 30px auto;
+    text-align: center;
+    border: 1px solid #2C2C2C;
+}
+
+#contributors-box h3 {
+    color: #BB86FC;
+    margin: 0 0 15px 0;
+    font-size: 18px;
+}
+
+#contributors-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+
+.contributor {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    transition: transform 0.2s ease;
+}
+
+.contributor:hover {
+    transform: translateY(-4px);
+}
+
+.contributor img {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    border: 3px solid #BB86FC;
+    box-shadow: 0 0 10px rgba(187, 134, 252, 0.4);
+    transition: all 0.3s ease;
+}
+
+.contributor:hover img {
+    border-color: #9C4DFF;
+    box-shadow: 0 0 15px rgba(156, 77, 255, 0.6);
+}
+
+.contributor span {
+    margin-top: 6px;
+    color: #E0E0E0;
+    font-size: 13px;
+    max-width: 70px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+#contributors-footer a {
+    color: #BB86FC;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+#contributors-footer a:hover {
+    color: #9C4DFF;
+    text-decoration: underline;
+}
+
+@media (max-width: 480px) {
+    #contributors-list {
+        gap: 10px;
+    }
+    .contributor img {
+        width: 48px;
+        height: 48px;
+    }
+}
