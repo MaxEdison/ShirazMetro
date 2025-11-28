@@ -1,7 +1,15 @@
 @import url('https://cdn.fontcdn.ir/Font/Persian/Vazir/Vazir.css');
 
+@font-face {
+	font-family: Arad;
+	font-style: normal;
+	font-weight: normal;
+	src: url('./assets/fonts/AradVF.woff2') format('woff2');	
+    font-display: fallback; 
+}
+
 body {
-    font-family: 'Vazir', sans-serif;
+    font-family: 'Arad','Vazir', sans-serif;
     background-color: #121212;
     color: #E0E0E0;
     display: flex;

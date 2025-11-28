@@ -24,7 +24,7 @@ you can use our demo on github pages
 
 #### Station Names
 
-```http
+```
   GET /api/v1/stations/stations
 ```
 
@@ -34,7 +34,7 @@ you can use our demo on github pages
 
 #### Scedules
 
-```http
+```
   GET /api/v1/scedules/calculate?startStation=${START_STATION_NAME}&destinationStation=${DESTINATION_STATION_NAME}&holiday=${BOOL}
 ```
 
