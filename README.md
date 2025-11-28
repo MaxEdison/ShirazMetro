@@ -52,7 +52,7 @@ you can use our demo on github pages
 so you want to find the scedules of a certain route what should you when useing the api?
 you have to send a request (a simple GET request) to get the full scheduel for example you want to go from 'شهید دستغیب' to 'دکتر شریعتی' and you want to have the holidays scedules too so you pass true to 'holiday' field :
 
-```javascript
+```
 /api/v1/scedules/calculate?startStation=شهید دستغیب&destinationStation=دکتر شریعتی&holiday=true
 
 ```
@@ -61,27 +61,27 @@ you have to send a request (a simple GET request) to get the full scheduel for e
 
 1. Clone the repository to your local machine:
 
-   ```bash
+   ```
     git clone https://github.com/MaxEdison/ShirazMetro.git
    ```
 
 2. Navigate to the project directory:
 
-   ```bash
+   ```
     cd ShirazMetro
     ```
 
 
 3. Install the required dependencies:
 
-   ```bash
+   ```
    npm install
    ```
 
 
 4. Start the server:
 
-   ```bash
+   ```
    npm run dev
    ```
 
