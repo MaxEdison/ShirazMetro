@@ -9,7 +9,7 @@
 }
 
 body {
-    font-family: 'Arad','Vazir', sans-serif;
+    font-family: 'Arad','Arad','Vazir', sans-serif;
     background-color: #121212;
     color: #E0E0E0;
     display: flex;
@@ -128,7 +128,7 @@ select, button {
     border-radius: 8px;
     border: none;
     font-size: 16px;
-    font-family: 'vazir', sans-serif;
+    font-family: 'Arad','Vazir', sans-serif;
     background-color: #2C2C2C;
     color: #E0E0E0;
     transition: background-color 0.3s ease, color 0.3s ease;
@@ -185,7 +185,7 @@ label {
 
 #calculate {
     background-color: #BB86FC;
-    font-family: 'vazir', sans-serif;
+    font-family: 'Arad','Vazir', sans-serif;
     color: #121212;
     font-weight: bold;
     cursor: pointer;
@@ -194,13 +194,13 @@ label {
 
 #calculate:disabled {
     background-color: #5C5C5C;
-    font-family: 'vazir', sans-serif;
+    font-family: 'Arad','Vazir', sans-serif;
     cursor: not-allowed;
 }
 
 #claculate:hover:not(:disabled) {
     background-color: #9C4DFF;
-    font-family: 'vazir', sans-serif;
+    font-family: 'Arad','Vazir', sans-serif;
 }
 
 #schedule {
@@ -302,7 +302,7 @@ label {
 
     select, button {
         font-size: 14px;
-        font-family: 'vazir', sans-serif;
+        font-family: 'Arad','Vazir', sans-serif;
         padding: 10px;
     }
 }
