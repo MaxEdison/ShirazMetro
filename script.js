@@ -142,6 +142,50 @@ function displaySchedule(schedule) {
 
 }
 
+
+async function loadContributors() {
+    const owner = "MaxEdison";
+    const repo = "ShirazMetro";
+    const list = document.getElementById("contributors-list");
+
+    try {
+        const response = await fetch(`https://api.github.com/repos/${owner}/${repo}/contributors?per_page=100`);
+        if (!response.ok) throw new Error("GitHub API error");
+
+        const contributors = await response.json();
+
+        contributors.sort((a, b) => b.contributions - a.contributions);
+
+        if (contributors.length === 0) {
+            list.innerHTML = "<p>هیچ مشارکت کننده ای یافت نشد</p>";
+            return;
+        }
+
+        list.innerHTML = "";
+
+        contributors.forEach(user => {
+            const div = document.createElement("a");
+            div.className = "contributor";
+            div.href = user.html_url;
+            div.target = "_blank";
+            div.title = `${user.login} – ${user.contributions} commit`;
+
+            div.innerHTML = `
+                <img src="${user.avatar_url}&s=112" alt="${user.login}" loading="lazy">
+                <span>${user.login}</span>
+            `;
+
+            list.appendChild(div);
+        });
+
+    } catch (err) {
+        console.error("Failed to load contributors:", err);
+        list.innerHTML = `<p style="color:#c70e30;">خطا در بارگذاری مشارکت کنندگان</p>`;
+    }
+}
+
+
+
 document.addEventListener('DOMContentLoaded', () => {
     fetchStations();
 
@@ -170,6 +214,7 @@ document.addEventListener('DOMContentLoaded', () => {
             loadStations(line);
         });
     });
+    loadContributors();
 
 });
 
