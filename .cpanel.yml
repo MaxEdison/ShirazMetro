@@ -1,0 +1,4 @@
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/sudoshzi/public_html/shirazmetro
+    - /bin/cp -r * $DEPLOYPATH
