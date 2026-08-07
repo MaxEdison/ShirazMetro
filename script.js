@@ -238,3 +238,14 @@ document.getElementById('calculate').addEventListener('click', async function() 
         console.error("Error fetching schedule:", error);
     }
 });
+
+
+
+const btn = document.getElementById("donateToggle");
+const content = document.getElementById("donateContent");
+const arrow = document.getElementById("donateArrow");
+
+btn.addEventListener("click", () => {
+    content.classList.toggle("open");
+    arrow.classList.toggle("open");
+});
