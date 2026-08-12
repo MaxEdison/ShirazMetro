@@ -447,3 +447,56 @@ label {
         height: 48px;
     }
 }
+
+
+
+
+
+
+.donation-widget {
+    max-width: 450px;
+    margin: 20px auto;
+}
+
+.collapse-btn {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 12px 16px;
+    cursor: pointer;
+
+    border: none;
+    border-radius: 10px;
+
+    background: #222;
+    color: #fff;
+
+    font-size: 16px;
+    transition: background .2s;
+}
+
+.collapse-btn:hover {
+    background: #333;
+}
+
+#donateArrow {
+    transition: transform .25s ease;
+    font-size: 18px;
+}
+
+.collapse-content {
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height .35s ease;
+    margin-top: 10px;
+}
+
+.collapse-content.open {
+    max-height: 320px;
+}
+
+#donateArrow.open {
+    transform: rotate(180deg);
+}
