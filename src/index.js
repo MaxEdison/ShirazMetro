@@ -81,13 +81,6 @@ const generateTimes = (startTime, endTime, intervalMinutes, MODE, line) => {
   const endDate = new Date(`1970-01-01T${endTime}:00`);
 
   for (let i = 0; currentTime <= endDate; i++) {
-    if (line === 'line1') {
-      if (i === 0 && MODE === 0) {
-        intervalMinutes = 20;
-      } else {
-        intervalMinutes = 15; 
-      }
-    }
     const timeString = currentTime.toTimeString().substr(0, 5);
     times[i] = timeString; 
     currentTime.setMinutes(currentTime.getMinutes() + intervalMinutes);
