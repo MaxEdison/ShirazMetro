@@ -1,0 +1,19 @@
+{
+  "name": "shirazmetro",
+  "version": "1.0.0",
+  "description": "Files and configurations for deploying ShirazMetro API on CloudFlare Worker",
+  "main": "data.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MaxEdison/ShirazMetro.git"
+  },
+  "keywords": [],
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/MaxEdison/ShirazMetro/issues"
+  },
+  "homepage": "https://github.com/MaxEdison/ShirazMetro#readme"
+}
