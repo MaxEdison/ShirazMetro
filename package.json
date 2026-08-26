@@ -13,7 +13,7 @@
     "url": "git+https://github.com/MaxEdison/ShirazMetro.git"
   },
   "keywords": [],
-  "type": "commonjs",
+  "type": "module",
   "bugs": {
     "url": "https://github.com/MaxEdison/ShirazMetro/issues"
   },
