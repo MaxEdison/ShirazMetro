@@ -117,6 +117,18 @@ const getSchedule = (url) => {
   const line = searchParams.get('line');
 
 
+  if (!stationsList[line].stations.includes(startStation) || !stationsList[line].stations.includes(destinationStation)) {
+    return new Response(JSON.stringify({
+      error: 'Invalid startStation or destinationStation for the specified line'
+    }), {
+      status: 400,
+      headers: {
+        'Content-Type': 'application/json',
+        ...corsHeaders
+      }
+    });
+  }
+
   if (!startStation || !destinationStation || !holiday || holiday != 'yes' && holiday != 'no') {
     return new Response(JSON.stringify({ 
       error: 'startStation, destinationStation and holiday(yes or no) parameters are required' 
