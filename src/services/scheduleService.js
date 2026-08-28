@@ -45,3 +45,14 @@ export const generateTimes = (startTime, endTime, intervalMinutes, MODE, line) =
   }
   return times;
 };
+
+export const addTripTime = (startTimes, tripDuration) => {
+  return startTimes.map((startTime) => {
+    const departure = new Date(`1970-01-01T${startTime}:00`);
+    const arrival = new Date(departure.getTime() + tripDuration * 60000);
+    return {
+      departure: startTime,
+      arrival: arrival.toTimeString().substr(0, 5),
+    };
+  });
+};
