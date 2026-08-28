@@ -358,6 +358,98 @@ label {
     text-align: center;
 }
 
+.powered-by {
+    margin: 20px 0 12px;
+    color: #E0E0E0;
+}
+
+.powered-by-logos {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 22px;
+    margin-bottom: 20px;
+}
+
+.powered-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: transform 0.25s ease, opacity 0.25s ease;
+}
+
+.powered-logo:hover {
+    transform: translateY(-3px);
+    opacity: 0.9;
+}
+
+.shirazlinux-logo {
+    flex-direction: column;
+    gap: 4px;
+}
+
+.shirazlinux-logo img {
+    width: 65px;
+    height: 65px;
+    object-fit: contain;
+}
+
+.github-pages-logo img {
+    width: 85px;
+    height: 85px;
+    object-fit: contain;
+    filter: invert(1);
+}
+
+.paasta-logo img {
+    width: 116px;
+    height: auto;
+    object-fit: contain;
+    filter: invert(1);
+}
+
+@media (max-width: 480px) {
+
+    .powered-by {
+        margin-top: 18px;
+        margin-bottom: 12px;
+    }
+
+    .powered-by-logos {
+        width: 100%;
+        flex-direction: column;
+        gap: 18px;
+        margin-bottom: 20px;
+    }
+
+    .powered-logo {
+        width: 100%;
+    }
+
+    .shirazlinux-logo {
+        gap: 4px;
+    }
+
+    .shirazlinux-logo img {
+        width: 58px;
+        height: 58px;
+    }
+
+    .github-pages-logo img {
+        width: 72px;
+        height: 72px;
+    }
+
+    .paasta-logo img {
+        width: 100px;
+        height: auto;
+    }
+
+}
+
 .footer a {
     color: #BB86FC;
 }
@@ -499,4 +591,25 @@ label {
 
 #donateArrow.open {
     transform: rotate(180deg);
+}
+
+
+.LogoType {
+  filter:invert();
+}
+
+.logogh {
+  display: block;
+  filter:invert();
+  width: 100px;
+  margin: 0 auto;
+    margin-top: 0px;
+    margin-right: auto;
+    margin-bottom: 0px;
+    margin-left: auto;
+}
+
+.footer-brand {
+  color: #F1592D;
+  font-size: 1.15rem
 }
