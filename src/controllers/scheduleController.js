@@ -20,11 +20,11 @@ export const getSchedule = (req, res) => {
     const holiday = reeq.holiday;
     const line = reeq.line;
 
-    if (!stationList[line]) {
+    if (!stationsList[line]) {
         return res.status(400).json({ error: 'Invalid line parameter' });
     }
 
-    if (!stationList[line].includes(startStation) || !stationList[line].includes(destinationStation)) {
+    if (!stationsList[line].includes(startStation) || !stationsList[line].includes(destinationStation)) {
         return res.status(400).json({ 
             error: 'Invalid startStation or destinationStation for the given line' 
         });
