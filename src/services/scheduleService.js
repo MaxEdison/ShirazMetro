@@ -32,3 +32,16 @@ export const calcualteTripTime = (startStation, destinationStation, isForward, l
 
     return tripTime;
 };
+
+export const generateTimes = (startTime, endTime, intervalMinutes, MODE, line) => {
+  const times = [];
+  let currentTime = new Date(`1970-01-01T${startTime}:00`);
+  const endDate = new Date(`1970-01-01T${endTime}:00`);
+
+  for (let i = 0; currentTime <= endDate; i++) {
+    const timeString = currentTime.toTimeString().substr(0, 5);
+    times[i] = timeString;
+    currentTime.setMinutes(currentTime.getMinutes() + intervalMinutes);
+  }
+  return times;
+};
