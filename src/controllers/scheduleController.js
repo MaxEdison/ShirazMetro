@@ -7,7 +7,7 @@ import {
 } from '../data/data.js';
 
 import { 
-    calcualteTripTime, 
+    calculateTripTime, 
     generateTimes, 
     addTripTime 
 } from '../services/scheduleService.js';
@@ -24,7 +24,7 @@ export const getSchedule = (req, res) => {
         return res.status(400).json({ error: 'Invalid line parameter' });
     }
 
-    if (!stationsList[line].includes(startStation) || !stationsList[line].includes(destinationStation)) {
+    if (!stationsList[line].stations.includes(startStation) || !stationsList[line].stations.includes(destinationStation)) {
         return res.status(400).json({ 
             error: 'Invalid startStation or destinationStation for the given line' 
         });
@@ -34,7 +34,7 @@ export const getSchedule = (req, res) => {
         return res.status(400).json({ error: 'Parameters are missing or invalid' });
     }
 
-    const stations = stationList[line].stations;
+    const stations = stationsList[line].stations;
 
     const isForward = stations.indexOf(startStation) < stations.indexOf(destinationStation);
     const tripDuration = calculateTripTime(

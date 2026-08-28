@@ -5,7 +5,7 @@ import {
 
 import { calculateClockDistances } from '../utils/timeUtils.js';
 
-export const calcualteTripTime = (startStation, destinationStation, isForward, line) => {
+export const calculateTripTime = (startStation, destinationStation, isForward, line) => {
     let tripTime = 0;
 
     const durations = calculateClockDistances(
