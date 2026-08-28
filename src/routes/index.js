@@ -1,4 +1,6 @@
 import { Router } from 'express';
+import stationRoutes from './stationRoutes.js';
+import scheduleRoutes from './scheduleRoutes.js';
 
 const router = Router();
 
