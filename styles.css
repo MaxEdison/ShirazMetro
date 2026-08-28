@@ -500,3 +500,24 @@ label {
 #donateArrow.open {
     transform: rotate(180deg);
 }
+
+
+.LogoType {
+  filter:invert();
+}
+
+.logogh {
+  display: block;
+  filter:invert();
+  width: 100px;
+  margin: 0 auto;
+    margin-top: 0px;
+    margin-right: auto;
+    margin-bottom: 0px;
+    margin-left: auto;
+}
+
+.footer-brand {
+  color: #F1592D;
+  font-size: 1.15rem
+}
