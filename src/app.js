@@ -7,7 +7,7 @@ import { errorHandler } from './middleware/errorHandler.js';
 const app = express();
 
 const API_INFO = {
-  message: 'Welcome to the ShirazMetro API!',
+  message: 'Welcome to the Shiraz Metro API! ',
   version: '1.0.0',
   endpoints: {
     stations: '/api/v1/stations/stations',
