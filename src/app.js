@@ -1,4 +1,5 @@
 import express from 'express';
+import cors from 'cors'
 import routes from './routes/index.js';
 import { notFound } from './middleware/notFound.js';
 import { errorHandler } from './middleware/errorHandler.js';
@@ -13,6 +14,8 @@ const API_INFO = {
     schedules: '/api/v1/schedules/calculate?startStation=STATION&destinationStation=STATION&holiday=yes/no&line=line1/line2'
   }
 };
+
+app.use(cors());
 
 app.get('/', (req, res) => {
   res.json(API_INFO);
