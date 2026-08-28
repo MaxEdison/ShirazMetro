@@ -415,10 +415,22 @@ label {
 
     .powered-by {
         margin-top: 18px;
+        margin-bottom: 12px;
     }
 
     .powered-by-logos {
+        width: 100%;
+        flex-direction: column;
         gap: 18px;
+        margin-bottom: 20px;
+    }
+
+    .powered-logo {
+        width: 100%;
+    }
+
+    .shirazlinux-logo {
+        gap: 4px;
     }
 
     .shirazlinux-logo img {
@@ -433,6 +445,7 @@ label {
 
     .paasta-logo img {
         width: 100px;
+        height: auto;
     }
 
 }
