@@ -75,13 +75,46 @@
         </div>
 
         
-        <select id="start" onchange="checkSelection()">
-            <option value="">انتخاب ایستگاه مبدا</option>
-        </select>
+        <!-- Start station -->
+        <div class="station-select" id="start-select">
+            <button type="button" class="station-select-button" id="start-button">
+                <span id="start-selected">انتخاب ایستگاه مبدا</span>
+                <span class="station-arrow"></span>
+            </button>
 
-        <select id="destination" onchange="checkSelection()">
-            <option value="">انتخاب ایستگاه مقصد</option>
-        </select>
+            <div class="station-dropdown">
+                <input
+                    type="text"
+                    class="station-search"
+                    id="start-search"
+                    placeholder="جستجوی ایستگاه..."
+                    autocomplete="off"
+                >
+
+                <div class="station-options" id="start-options"></div>
+            </div>
+        </div>
+
+
+        <!-- Destination station -->
+        <div class="station-select" id="destination-select">
+            <button type="button" class="station-select-button" id="destination-button">
+                <span id="destination-selected">انتخاب ایستگاه مقصد</span>
+                <span class="station-arrow"></span>
+            </button>
+
+            <div class="station-dropdown">
+                <input
+                    type="text"
+                    class="station-search"
+                    id="destination-search"
+                    placeholder="جستجوی ایستگاه..."
+                    autocomplete="off"
+                >
+
+                <div class="station-options" id="destination-options"></div>
+            </div>
+        </div>
         
         <label class="checkbox-container">
             <span class="label-text">روز تعطیل؟</span>
