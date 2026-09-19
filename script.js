@@ -15,34 +15,153 @@ async function fetchStations() {
 }
 
 function loadStations(line) {
-    const startSelect = document.getElementById('start');
-    const destinationSelect = document.getElementById('destination');
+    const startOptions = document.getElementById('start-options');
+    const destinationOptions = document.getElementById('destination-options');
 
-    startSelect.innerHTML = '<option value="">انتخاب ایستگاه مبدا</option>';
-    destinationSelect.innerHTML = '<option value="">انتخاب ایستگاه مقصد</option>';
+    const startSelected = document.getElementById('start-selected');
+    const destinationSelected = document.getElementById('destination-selected');
+
+    // Reset selected stations
+    startSelected.textContent = 'انتخاب ایستگاه مبدا';
+    destinationSelected.textContent = 'انتخاب ایستگاه مقصد';
+
+    // Store selected values
+    document.getElementById('start-select').dataset.value = '';
+    document.getElementById('destination-select').dataset.value = '';
+
+    // Clear previous options
+    startOptions.innerHTML = '';
+    destinationOptions.innerHTML = '';
 
     metroData[line].stations.forEach(station => {
-        const optionStart = document.createElement('option');
-        optionStart.value = station;
-        optionStart.textContent = station;
-        startSelect.appendChild(optionStart);
+        // Start station
+        const startOption = document.createElement('div');
+        startOption.className = 'station-option';
+        startOption.textContent = station;
+        startOption.dataset.value = station;
 
-        const optionDest = document.createElement('option');
-        optionDest.value = station;
-        optionDest.textContent = station;
-        destinationSelect.appendChild(optionDest);
+        startOptions.appendChild(startOption);
+
+        // Destination station
+        const destinationOption = document.createElement('div');
+        destinationOption.className = 'station-option';
+        destinationOption.textContent = station;
+        destinationOption.dataset.value = station;
+
+        destinationOptions.appendChild(destinationOption);
+    });
+}
+
+function setupStationDropdown(selectId, buttonId, selectedId, searchId, optionsId) {
+    const select = document.getElementById(selectId);
+    const button = document.getElementById(buttonId);
+    const selected = document.getElementById(selectedId);
+    const search = document.getElementById(searchId);
+    const options = document.getElementById(optionsId);
+    const dropdown = select.querySelector('.station-dropdown');
+
+    button.addEventListener('click', () => {
+        const isOpen = dropdown.classList.contains('open');
+
+        closeAllDropdowns();
+
+        if (!isOpen) {
+            dropdown.classList.add('open');
+            button.classList.add('open');
+
+            search.value = '';
+            filterStations(options, '');
+
+            setTimeout(() => {
+                search.focus();
+            }, 50);
+        }
+    });
+
+    search.addEventListener('input', () => {
+        filterStations(options, search.value);
+    });
+
+    options.addEventListener('click', (event) => {
+        const option = event.target.closest('.station-option');
+
+        if (!option) {
+            return;
+        }
+
+        const value = option.dataset.value;
+
+        select.dataset.value = value;
+        selected.textContent = value;
+
+        options.querySelectorAll('.station-option').forEach(item => {
+            item.classList.remove('selected');
+        });
+
+        option.classList.add('selected');
+
+        dropdown.classList.remove('open');
+        button.classList.remove('open');
+
+        checkSelection();
+    });
+}
+
+function filterStations(optionsContainer, searchText) {
+    const search = searchText.trim().toLowerCase();
+    const options = optionsContainer.querySelectorAll('.station-option');
+
+    let visibleCount = 0;
+
+    options.forEach(option => {
+        const stationName = option.textContent.toLowerCase();
+
+        if (stationName.includes(search)) {
+            option.style.display = 'block';
+            visibleCount++;
+        } else {
+            option.style.display = 'none';
+        }
+    });
+
+    let noResults = optionsContainer.querySelector('.station-no-results');
+
+    if (visibleCount === 0) {
+        if (!noResults) {
+            noResults = document.createElement('div');
+            noResults.className = 'station-no-results';
+            noResults.textContent = 'ایستگاهی پیدا نشد';
+            optionsContainer.appendChild(noResults);
+        }
+    } else if (noResults) {
+        noResults.remove();
+    }
+}
+
+function closeAllDropdowns() {
+    document.querySelectorAll('.station-dropdown').forEach(dropdown => {
+        dropdown.classList.remove('open');
+    });
+
+    document.querySelectorAll('.station-select-button').forEach(button => {
+        button.classList.remove('open');
     });
 }
 
 function checkSelection() {
-    const startStation = document.getElementById('start').value;
-    const destinationStation = document.getElementById('destination').value;
+    const startStation = document.getElementById('start-select').dataset.value;
+    const destinationStation = document.getElementById('destination-select').dataset.value;
+
     const calculateButton = document.getElementById('calculate');
     const scheduleContainer = document.getElementById('schedule');
 
     scheduleContainer.classList.remove('show');
 
-    if (startStation === "" || destinationStation === "" || startStation === destinationStation) {
+    if (
+        startStation === "" ||
+        destinationStation === "" ||
+        startStation === destinationStation
+    ) {
         calculateButton.disabled = true;
     } else {
         calculateButton.disabled = false;
@@ -190,6 +309,22 @@ async function loadContributors() {
 document.addEventListener('DOMContentLoaded', () => {
     fetchStations();
 
+    setupStationDropdown(
+        'start-select',
+        'start-button',
+        'start-selected',
+        'start-search',
+        'start-options'
+    );
+
+    setupStationDropdown(
+        'destination-select',
+        'destination-button',
+        'destination-selected',
+        'destination-search',
+        'destination-options'
+    );
+
     const tabs = document.querySelectorAll('.switch-btn');
     const slider = document.querySelector('.switch-slider');
 
@@ -220,8 +355,8 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 document.getElementById('calculate').addEventListener('click', async function() {
-    const startStation = document.getElementById('start').value;
-    const destinationStation = document.getElementById('destination').value;
+    const startStation = document.getElementById('start-select').dataset.value;
+    const destinationStation = document.getElementById('destination-select').dataset.value;
     const isHoliday = document.getElementById('holiday').checked;
 
     try {
@@ -249,4 +384,11 @@ const arrow = document.getElementById("donateArrow");
 btn.addEventListener("click", () => {
     content.classList.toggle("open");
     arrow.classList.toggle("open");
+});
+
+// Closing the dropdown when clicking outside it
+document.addEventListener('click', (event) => {
+    if (!event.target.closest('.station-select')) {
+        closeAllDropdowns();
+    }
 });
