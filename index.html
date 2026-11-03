@@ -1,10 +1,13 @@
 <!DOCTYPE html>
-<html lang="fa">
+<html lang="fa" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#0a0a10">
+    <meta name="color-scheme" content="dark">
     <title>زمان‌بندی مترو شیراز</title>
-    <link rel="stylesheet" href="styles.css?v=2.1">
+    <link rel="stylesheet" href="styles.css?v=3.0">
+
     <!-- SEO Meta Tags -->
     <meta name="description" content="زمان‌بندی مترو شیراز | زمان‌بندی دقیق حرکت قطارها بین ایستگاه‌ها، با درنظر گرفتن روزهای تعطیل. سریع، ساده و همیشه در دسترس.">
     <meta name="keywords" content="مترو شیراز, زمان‌بندی مترو, برنامه‌ریزی سفر, ایستگاه مترو, حمل و نقل عمومی, Shiraz Metro, برنامه مترو شیراز, زمانبندی مترو, زمان بندی مترو شیراز">
@@ -15,206 +18,256 @@
     <script defer src="https://umami.sudoshz.ir/script.js" data-website-id="5c4e2c6e-1751-46b0-bca6-391fd97be411"></script>
 
     <!-- Logo - icon -->
-    <link rel="icon" href="/assets/icons/logo-icon.png" type="image/x-icon">
+    <link rel="icon" href="assets/icons/logo-icon.png" type="image/png">
+    <link rel="apple-touch-icon" href="assets/icons/logo-icon.png">
 
     <!-- Open Graph / Facebook -->
     <meta property="og:title" content="زمان‌بندی مترو شیراز">
     <meta property="og:description" content="زمان‌بندی دقیق حرکت قطارها بین ایستگاه‌های مترو شیراز، مناسب برای روزهای کاری و تعطیل. تجربه‌ای سریع و کاربرپسند.">
     <meta property="og:type" content="website">
-    <meta property="og:image" content="/assets/photos/poster-shirazmetro.jpg" alt="پوستر مترو شیراز">
-
-
+    <meta property="og:locale" content="fa_IR">
+    <meta property="og:url" content="https://metro.sudoshz.ir/">
+    <meta property="og:image" content="https://metro.sudoshz.ir/assets/photos/poster-shirazmetro.jpg">
+    <meta property="og:image:alt" content="پوستر مترو شیراز">
 
     <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="زمان‌بندی مترو شیراز">
     <meta name="twitter:description" content="برنامه‌ریزی آسان و سریع سفر با مترو در شیراز. فقط مبدا و مقصد رو انتخاب کن!">
+    <meta name="twitter:image" content="https://metro.sudoshz.ir/assets/photos/poster-shirazmetro.jpg">
 
     <!-- Canonical Tags -->
     <link rel="canonical" href="https://metro.sudoshz.ir/">
-    
-
 </head>
 
-<body>
-    
-    <!-- <div id="warning-box">
-        <h2> </h2>
-        <p> 
-        </p>
-    </div>  -->
-        
-    <div class="donation-widget">
-    <button class="collapse-btn" id="donateToggle">
-        <span>حمایت از شیرازمترو</span>
-        <span id="donateArrow">▼</span>
-    </button>
+<body data-line="line1">
+    <div class="ambient" aria-hidden="true"><span></span><span></span><span></span></div>
 
-    <div class="collapse-content" id="donateContent">
-        <div style="display:flex;justify-content:center;width:100%">
-        <iframe
-            src="https://donate.sudoshz.ir/embed/widget.php?slug=shirazmetro&theme=dark&lang=fa"
-            title="Support via Yavar"
-            loading="lazy"
-            referrerpolicy="strict-origin-when-cross-origin"
-            style="width:100%;max-width:420px;height:280px;border:0;border-radius:16px;display:block;margin:0 auto"
-            sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox">
-        </iframe>
-        </div>
-    </div>
-    </div>
+    <div class="page">
 
+        <header class="hero">
+            <div class="hero-badge">
+                <img src="assets/icons/logo-icon.png" alt="" width="44" height="44" decoding="async">
+            </div>
+            <h1>زمان‌بندی مترو شیراز</h1>
+            <p class="hero-sub">مبدا و مقصد رو انتخاب کن، قطار بعدی رو همین‌جا ببین</p>
+        </header>
 
+        <main class="layout">
 
-    <div id="trip-container">
-        <h1>زمان‌بندی مترو شیراز</h1>
+            <!-- ======================= Planner ======================= -->
+            <section class="card planner" aria-label="برنامه‌ریزی سفر">
 
-        <div class="switch-tabs">
-            <div class="switch-slider"></div>
-            <button class="switch-btn active" data-line="line1" onclick="checkSelection()">خط ۱</button>
-            <button class="switch-btn" data-line="line2" onclick="checkSelection()">خط ۲</button>
-        </div>
+                <div class="switch-tabs" role="tablist" aria-label="انتخاب خط مترو">
+                    <div class="switch-slider" aria-hidden="true"></div>
+                    <button type="button" class="switch-btn active" role="tab" aria-selected="true" data-line="line1">
+                        <span class="line-dot" aria-hidden="true"></span>خط ۱
+                    </button>
+                    <button type="button" class="switch-btn" role="tab" aria-selected="false" data-line="line2">
+                        <span class="line-dot" aria-hidden="true"></span>خط ۲
+                    </button>
+                </div>
 
-        
-        <!-- Start station -->
-        <div class="station-select" id="start-select">
-            <button type="button" class="station-select-button" id="start-button">
-                <span id="start-selected">انتخاب ایستگاه مبدا</span>
-                <span class="station-arrow"></span>
+                <p class="line-meta" id="line-meta" aria-live="polite"></p>
+
+                <div class="alert" id="station-error" role="alert" hidden>
+                    <span>دریافت فهرست ایستگاه‌ها ممکن نشد. اتصال اینترنت را بررسی کنید.</span>
+                    <button type="button" id="station-retry">تلاش دوباره</button>
+                </div>
+
+                <div class="route">
+                    <div class="route-rail" aria-hidden="true"></div>
+
+                    <div class="route-fields">
+                        <!-- Start station -->
+                        <div class="station-select" id="start-select">
+                            <button type="button" class="station-select-button" id="start-button"
+                                    aria-haspopup="listbox" aria-expanded="false" aria-controls="start-options">
+                                <span class="station-caption">مبدا</span>
+                                <span class="station-value" id="start-selected">انتخاب ایستگاه مبدا</span>
+                                <span class="station-arrow" aria-hidden="true"></span>
+                            </button>
+
+                            <div class="station-dropdown">
+                                <input type="text" class="station-search" id="start-search"
+                                       placeholder="جستجوی ایستگاه..." autocomplete="off"
+                                       aria-label="جستجوی ایستگاه مبدا">
+                                <div class="station-options" id="start-options" role="listbox" aria-label="ایستگاه‌های مبدا"></div>
+                            </div>
+                        </div>
+
+                        <!-- Destination station -->
+                        <div class="station-select" id="destination-select">
+                            <button type="button" class="station-select-button" id="destination-button"
+                                    aria-haspopup="listbox" aria-expanded="false" aria-controls="destination-options">
+                                <span class="station-caption">مقصد</span>
+                                <span class="station-value" id="destination-selected">انتخاب ایستگاه مقصد</span>
+                                <span class="station-arrow" aria-hidden="true"></span>
+                            </button>
+
+                            <div class="station-dropdown">
+                                <input type="text" class="station-search" id="destination-search"
+                                       placeholder="جستجوی ایستگاه..." autocomplete="off"
+                                       aria-label="جستجوی ایستگاه مقصد">
+                                <div class="station-options" id="destination-options" role="listbox" aria-label="ایستگاه‌های مقصد"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="button" class="swap-btn" id="swap" aria-label="جابه‌جایی مبدا و مقصد" title="جابه‌جایی مبدا و مقصد">
+                        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M7 4v16M7 20l-3.5-3.5M7 20l3.5-3.5"/>
+                            <path d="M17 20V4M17 4l-3.5 3.5M17 4l3.5 3.5"/>
+                        </svg>
+                    </button>
+                </div>
+
+                <p class="form-hint" id="form-hint" role="status" aria-live="polite"></p>
+
+                <label class="checkbox-container">
+                    <span class="label-text">روز تعطیل؟</span>
+                    <input type="checkbox" id="holiday" role="switch">
+                    <span class="checkmark" aria-hidden="true"></span>
+                </label>
+
+                <button type="button" id="calculate" disabled>
+                    <span class="btn-label">برو بریم</span>
+                    <span class="btn-spinner" aria-hidden="true"></span>
+                </button>
+            </section>
+
+            <!-- ======================= Results ======================= -->
+            <section class="card results" id="results" aria-label="نتیجه زمان‌بندی" aria-live="polite">
+
+                <div class="empty" id="results-empty">
+                    <svg class="empty-art" viewBox="0 0 240 110" fill="none" aria-hidden="true">
+                        <path class="art-rail" d="M12 82h216" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-dasharray="2 9"/>
+                        <circle cx="30" cy="82" r="7" class="art-stop"/>
+                        <circle cx="120" cy="82" r="7" class="art-stop"/>
+                        <circle cx="210" cy="82" r="7" class="art-stop"/>
+                        <g class="art-train">
+                            <rect x="0" y="34" width="74" height="34" rx="12" class="art-body"/>
+                            <rect x="9" y="42" width="14" height="12" rx="4" fill="#0a0a10" opacity=".55"/>
+                            <rect x="30" y="42" width="14" height="12" rx="4" fill="#0a0a10" opacity=".55"/>
+                            <rect x="51" y="42" width="14" height="12" rx="4" fill="#0a0a10" opacity=".55"/>
+                            <circle cx="18" cy="72" r="4.5" fill="#fff"/>
+                            <circle cx="56" cy="72" r="4.5" fill="#fff"/>
+                        </g>
+                    </svg>
+                    <h2>سفرت رو برنامه‌ریزی کن</h2>
+                    <p>خط، مبدا و مقصد رو انتخاب کن تا زمان حرکت و رسیدن قطارها اینجا نمایش داده بشه.</p>
+                </div>
+
+                <div class="results-body" id="results-body" hidden>
+                    <div class="results-head">
+                        <div>
+                            <h2 class="route-title" id="route-title"></h2>
+                            <p class="route-sub" id="route-sub"></p>
+                        </div>
+                    </div>
+
+                    <div class="summary" id="summary">
+                        <div class="summary-main">
+                            <span class="summary-label" id="sum-label">قطار بعدی</span>
+                            <strong class="summary-time" id="sum-dep">--:--</strong>
+                            <span class="summary-count" id="sum-count"></span>
+                        </div>
+                        <div class="summary-side">
+                            <div><small>رسیدن به مقصد</small><b id="sum-arr">--:--</b></div>
+                            <div><small>مدت سفر</small><b id="sum-dur">--</b></div>
+                        </div>
+                    </div>
+
+                    <div class="list-head">
+                        <span id="list-count"></span>
+                        <label class="chip-toggle">
+                            <input type="checkbox" id="only-upcoming">
+                            <span>فقط قطارهای بعدی</span>
+                        </label>
+                    </div>
+
+                    <div id="schedule" tabindex="0" aria-label="فهرست قطارها"></div>
+
+                    <div class="legend" aria-hidden="true">
+                        <span><i class="lg lg-next"></i>بعدی</span>
+                        <span><i class="lg lg-future"></i>پیش رو</span>
+                        <span><i class="lg lg-missed"></i>گذشته</span>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- ======================= Donation ======================= -->
+        <div class="donation-widget">
+            <button type="button" class="collapse-btn" id="donateToggle" aria-expanded="false" aria-controls="donateContent">
+                <span class="collapse-title">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M12 21s-7.5-4.6-9.6-9.2C.9 8.4 2.7 5 6 5c2 0 3.3 1 4 2.2h4C14.7 6 16 5 18 5c3.3 0 5.1 3.4 3.6 6.8C19.5 16.4 12 21 12 21z"/></svg>
+                    حمایت از شیرازمترو
+                </span>
+                <span id="donateArrow" class="station-arrow" aria-hidden="true"></span>
             </button>
 
-            <div class="station-dropdown">
-                <input
-                    type="text"
-                    class="station-search"
-                    id="start-search"
-                    placeholder="جستجوی ایستگاه..."
-                    autocomplete="off"
-                >
-
-                <div class="station-options" id="start-options"></div>
+            <div class="collapse-content" id="donateContent">
+                <div class="collapse-inner">
+                    <iframe
+                        src="https://donate.sudoshz.ir/embed/widget.php?slug=shirazmetro&theme=dark&lang=fa"
+                        title="حمایت مالی از شیرازمترو"
+                        loading="lazy"
+                        referrerpolicy="strict-origin-when-cross-origin"
+                        sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox">
+                    </iframe>
+                </div>
             </div>
         </div>
 
+        <!-- ======================= Footer ======================= -->
+        <footer class="footer">
+            <p class="footer-lead">
+                ساخته شده با ❤️ توسط جامعه برای جامعه<br>
+                این وبسایت یک
+                <a href="https://sudoshz.ir/what-is-free-software/" target="_blank" rel="noopener noreferrer">نرم افزار آزاد</a>
+                است.
+            </p>
 
-        <!-- Destination station -->
-        <div class="station-select" id="destination-select">
-            <button type="button" class="station-select-button" id="destination-button">
-                <span id="destination-selected">انتخاب ایستگاه مقصد</span>
-                <span class="station-arrow"></span>
-            </button>
-
-            <div class="station-dropdown">
-                <input
-                    type="text"
-                    class="station-search"
-                    id="destination-search"
-                    placeholder="جستجوی ایستگاه..."
-                    autocomplete="off"
-                >
-
-                <div class="station-options" id="destination-options"></div>
+            <div id="contributors-box">
+                <h3>مشارکت کنندگان</h3>
+                <div id="contributors-list">
+                    <p>در حال بارگذاری...</p>
+                </div>
+                <div id="contributors-footer">
+                    <a href="https://github.com/MaxEdison/ShirazMetro" target="_blank" rel="noopener noreferrer">
+                        مشاهده در GitHub ←
+                    </a>
+                </div>
             </div>
-        </div>
-        
-        <label class="checkbox-container">
-            <span class="label-text">روز تعطیل؟</span>
-            <input type="checkbox" id="holiday">
-            <span class="checkmark"></span>
-        </label>
 
-        <button id="calculate" disabled>برو بریم</button>
+            <p class="powered-by">قدرت گرفته از</p>
 
-        <div id="schedule"></div>
+            <div class="powered-by-logos">
+                <a href="https://sudoshz.ir/" target="_blank" rel="noopener noreferrer" class="powered-logo shirazlinux-logo">
+                    <strong class="footer-brand">شیرازلینوکس</strong>
+                    <img src="assets/logos/logosudoshz.png" alt="Shiraz Linux Community" decoding="async" loading="lazy" width="65" height="65">
+                </a>
 
+                <a href="https://pages.github.com/" target="_blank" rel="noopener noreferrer" class="powered-logo github-pages-logo">
+                    <img src="assets/logos/github-pages.svg" alt="GitHub Pages" width="100" height="100" decoding="async" loading="lazy">
+                </a>
 
+                <a href="https://paasta.cloud/" target="_blank" rel="noopener noreferrer" class="powered-logo paasta-logo">
+                    <img src="assets/logos/paasta-type.svg" alt="PaaSta Cloud" width="116" height="30" decoding="async" loading="lazy">
+                </a>
+            </div>
 
+            <div class="social">
+                <a class="social-github" href="https://github.com/MaxEdison/ShirazMetro/" target="_blank" rel="noopener noreferrer" title="GitHub" aria-label="GitHub">
+                    <img src="assets/icons/github.svg" alt="" width="26" height="26">
+                </a>
+                <a href="https://t.me/MaxEdison" target="_blank" rel="noopener noreferrer" title="Telegram" aria-label="Telegram">
+                    <img src="assets/icons/telegram.svg" alt="" width="26" height="26">
+                </a>
+            </div>
+        </footer>
     </div>
-
-    <div class="footer">
-        <p> ساخته شده با ❤️ توسط جامعه برای جامعه
-        <br> این وبسایت یک 
-            <a href="https://sudoshz.ir/what-is-free-software/" target="_blank"> نرم افزار آزاد </a>  
-            است.  
-        </p>
-
-        <div id="contributors-box">
-        <h3>مشارکت کنندگان</h3>
-        <div id="contributors-list">
-            <p>در حال بارگذاری...</p>
-        </div>
-        <div id="contributors-footer">
-            <a href="https://github.com/MaxEdison/ShirazMetro" target="_blank">
-                مشاهده در GitHub →
-            </a>
-        </div>
-        </div>
-
-<p class="powered-by">
-    قدرت گرفته از:
-</p>
-
-<div class="powered-by-logos">
-
-    <a href="https://sudoshz.ir/" target="_blank" class="powered-logo shirazlinux-logo">
-        <strong class="footer-brand">شیرازلینوکس</strong>
-        <img
-            src="/assets/logos/logosudoshz.png"
-            alt="Shiraz Linux Community"
-            decoding="async"
-            width="65"
-            height="65"
-        >
-    </a>
-
-    <a href="https://pages.github.com/" target="_blank" class="powered-logo github-pages-logo">
-        <img
-            src="/assets/logos/github-pages.svg"
-            alt="GitHub Pages"
-            width="100"
-            height="100"
-            decoding="async"
-        >
-    </a>
-
-    <a href="https://paasta.cloud/" target="_blank" class="powered-logo paasta-logo">
-        <img
-            src="/assets/logos/paasta-type.svg"
-            alt="PaaSta Cloud"
-            width="116"
-            height="30"
-            decoding="async"
-        >
-    </a>
-
-</div>
-
-        <!-- <div id="contact-box"> -->
-        <a href="https://github.com/MaxEdison/ShirazMetro/" target="_blank" title="GitHub">
-            <img src="/assets/icons/github.svg" alt="GitHub">
-        </a>
-
-        <a href="https://t.me/MaxEdison" target="_blank" title="Telegram">
-            <img src="/assets/icons/telegram.svg" alt="Telegram">
-        </a>
-
-        <!-- <a href="https://www.linkedin.com/in/MaxEdison" target="_blank" title="LinkedIn">
-            <img src="icons/linkedin.svg" alt="LinkedIn">
-        </a> -->
-        
-        <!-- <a href="https://www.x.com/MaxEdison021" target="_blank" title="X(formerly Twitter)">
-            <img src="icons/twitter-original.svg" alt="X(formerly Twitter)">
-        </a> -->
-        <!-- </div> -->
-    </div>
-        
-
-
-
-
-        
-
-
-
 
     <script src="script.js"></script>
     <script defer src="https://cloud.umami.is/script.js" data-website-id="dc3d9773-0483-4347-914c-ee4f781a1c2f"></script>
@@ -224,10 +277,9 @@
           "@type": "WebSite",
           "name": "زمان‌بندی مترو شیراز",
           "url": "https://metro.sudoshz.ir",
+          "inLanguage": "fa",
           "description": "زمان‌بندی دقیق مترو شیراز"
         }
     </script>
-        
-        
 </body>
 </html>
