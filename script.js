@@ -587,7 +587,7 @@ function refreshStatuses() {
         item.id = isNext ? "next-train" : "";
 
         const badge = item.querySelector(".si-badge");
-        badge.textContent = near && isNext ? "در حال ورود" : isNext ? "قطار بعدی" : "";
+        badge.textContent = near && isNext ? "در حال ورود" : isNext ? "مترو بعدی" : "";
     });
 
     const upcomingCount = list.querySelectorAll(".schedule-item.future").length;
@@ -604,7 +604,7 @@ function renderSummary(nextItem, now) {
     if (!nextItem) {
         summary.classList.add("is-empty");
         $("sum-label").textContent = "امروز";
-        $("sum-dep").textContent = "قطار دیگری باقی نمانده";
+        $("sum-dep").textContent = "مترو دیگری باقی نمانده";
         $("sum-count").textContent = "";
         return;
     }
@@ -613,7 +613,7 @@ function renderSummary(nextItem, now) {
     const train = state.schedule[index];
     const diff = Number(nextItem.dataset.departure) - now;
 
-    $("sum-label").textContent = "قطار بعدی";
+    $("sum-label").textContent = "مترو بعدی";
     $("sum-dep").textContent = toFa(train.departure);
     $("sum-arr").textContent = toFa(train.arrival);
     $("sum-dur").textContent = formatMinutes(durationBetween(train.departure, train.arrival));
